@@ -1,0 +1,452 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hoja de Trabajo">
+<meta name="theme-color" content="#0f172a">
+<title>Hoja de Trabajo</title>
+<link id="touch-icon" rel="apple-touch-icon" href="">
+<link id="manifest-link" rel="manifest" href="">
+<style>
+  :root{--slate900:#0f172a;--slate800:#1e293b;--slate700:#334155;--slate500:#64748b;--slate400:#94a3b8;--slate200:#e2e8f0;--slate100:#f1f5f9;--slate50:#f8fafc;--amber:#fbbf24;--amber-d:#b45309;--amber-bg:#fffbeb;--emerald:#059669;--red:#ef4444;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--slate100);color:var(--slate800);-webkit-font-smoothing:antialiased}
+  button,input{font-family:inherit}
+  button{cursor:pointer;border:none;background:none}
+  input{outline:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+  /* top bar */
+  .top{background:var(--slate900);color:#fff;position:sticky;top:0;z-index:30;box-shadow:0 1px 4px rgba(0,0,0,.2);padding-top:env(safe-area-inset-top)}
+  .top-in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px}
+  .logo{background:var(--amber);color:var(--slate900);width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .brand b{font-size:15px;line-height:1.1}.brand small{font-size:11px;color:var(--slate400);display:flex;align-items:center;gap:4px}
+  .row{display:flex;align-items:center;gap:6px}
+  .btn{padding:9px 13px;border-radius:10px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+  .btn-amber{background:var(--amber);color:var(--slate900)}.btn-amber:active{transform:scale(.97)}
+  .btn-ghost{color:#fff}.btn-ghost:active{background:var(--slate700)}
+  .btn-dark{background:var(--slate900);color:#fff}.btn-dark:active{transform:scale(.97)}
+  .btn-dark:disabled{opacity:.3}
+  .btn-green{background:var(--emerald);color:#fff}
+  .btn-lite{background:#fff;border:1px solid var(--slate200);color:var(--slate700)}
+  /* login */
+  .login{min-height:100vh;background:var(--slate900);display:flex;align-items:center;justify-content:center;padding:20px}
+  .login-card{width:100%;max-width:360px}
+  .lo-head{text-align:center;margin-bottom:26px}
+  .lo-logo{background:var(--amber);color:var(--slate900);width:62px;height:62px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .lo-head h1{color:#fff;font-size:24px}.lo-head p{color:var(--slate400);font-size:14px;margin-top:4px}
+  .badge-demo{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;background:rgba(251,191,36,.2);color:var(--amber);padding:3px 9px;border-radius:99px}
+  .card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .inp{width:100%;border:2px solid var(--slate200);border-radius:12px;padding:13px 14px;font-size:16px;transition:.15s}
+  .inp:focus{border-color:var(--amber)}
+  .inp-icon{padding-left:42px}
+  .ipos{position:relative}.ipos svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--slate400)}
+  .stack>*+*{margin-top:12px}
+  .full{width:100%;justify-content:center;padding:13px}
+  .err{color:var(--red);font-size:14px;display:flex;align-items:center;gap:5px}
+  .demo-accts{margin-top:20px;padding-top:16px;border-top:1px solid var(--slate100)}
+  .demo-accts>p{font-size:12px;color:var(--slate400);text-align:center;margin-bottom:8px}
+  .acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .acct{border:1px solid var(--slate200);border-radius:12px;padding:10px;text-align:left;transition:.15s}
+  .acct:active{background:var(--slate50)}
+  .acct b{display:flex;align-items:center;gap:5px;color:var(--slate700);font-size:14px}
+  .acct small{font-size:11px;color:var(--slate400)}
+  /* generic */
+  .center{text-align:center}
+  .hero-ic{width:78px;height:78px;border-radius:20px;background:var(--amber);color:var(--slate900);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  h1.title{font-size:23px;color:var(--slate900)} .muted{color:var(--slate500);margin-top:6px}
+  .pt40{padding-top:40px}.pt24{padding-top:24px}
+  .big-btn{background:var(--slate900);color:#fff;padding:16px 30px;border-radius:18px;font-weight:700;font-size:18px;display:inline-flex;align-items:center;gap:8px;margin-top:26px}
+  .big-btn:active{transform:scale(.98)}
+  /* stepper */
+  .stepper{display:flex;align-items:center;justify-content:space-between}
+  .stp{display:flex;align-items:center;flex:1}.stp:last-child{flex:none}
+  .stp-col{display:flex;flex-direction:column;align-items:center}
+  .dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--slate200);color:var(--slate400);font-weight:700;font-size:14px}
+  .dot.active{background:var(--amber);color:var(--slate900)}.dot.done{background:var(--emerald);color:#fff}
+  .stp-lbl{font-size:10px;margin-top:4px;color:var(--slate400);font-weight:600}.stp-lbl.on{color:var(--slate900)}
+  .line{height:2px;flex:1;margin:0 4px;margin-top:-18px;background:var(--slate200)}.line.done{background:var(--emerald)}
+  .panel{background:#fff;border-radius:18px;border:1px solid var(--slate200);padding:24px;margin-top:20px;min-height:320px}
+  .lbl{display:block;font-size:14px;font-weight:600;color:var(--slate500);margin-bottom:6px}
+  .stitle{display:flex;align-items:center;gap:8px;color:var(--slate900);margin-bottom:6px}.stitle h2{font-size:21px}
+  .shint{color:var(--slate500);font-size:14px;margin-bottom:20px}
+  .field+.field{margin-top:16px}
+  .nav{display:flex;align-items:center;justify-content:space-between;margin-top:20px}
+  .shifts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .shift{padding:14px;border-radius:12px;font-weight:800;font-size:18px;border:2px solid var(--slate200);background:#fff;color:var(--slate500)}
+  .shift.on{background:var(--slate900);color:#fff;border-color:var(--slate900)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .seg button{padding:12px;border-radius:12px;font-weight:600;border:2px solid var(--slate200);background:#fff;color:var(--slate500)}
+  .seg button.on{background:var(--slate900);color:#fff;border-color:var(--slate900)}
+  .scrapbox{background:var(--amber-bg);border:2px solid #fde68a;border-radius:12px;padding:16px}
+  .scrapbox .note{font-size:14px;color:var(--amber-d);font-weight:600;display:flex;align-items:center;gap:6px;margin-bottom:12px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .calc{background:#fff;border:1px solid #fde68a;border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:between;justify-content:space-between;margin-top:12px}
+  .calc .v{font-size:24px;font-weight:800;color:var(--slate900)}
+  .formula{font-size:12px;color:var(--amber-d);margin-top:8px}
+  .summary{background:var(--slate50);border:1px solid var(--slate200);border-radius:12px;padding:16px;margin-top:8px}
+  .summary .h{font-size:11px;font-weight:700;color:var(--slate400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+  .srow{display:flex;justify-content:space-between;font-size:14px;padding:3px 0}.srow .k{color:var(--slate500)}.srow .val{font-weight:600}
+  /* lists / cards */
+  .rec{width:100%;background:#fff;border:1px solid var(--slate200);border-radius:14px;padding:15px;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;transition:.15s}
+  .rec:active{border-color:var(--amber)}
+  .rec .ord{font-weight:800;color:var(--slate900)}
+  .pill{font-size:11px;background:var(--slate100);color:var(--slate500);padding:2px 8px;border-radius:99px}
+  .meta{font-size:13px;color:var(--slate500);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap}
+  .meta span{display:flex;align-items:center;gap:4px}
+  .ok{color:var(--emerald);font-weight:800;font-size:17px}.sc{color:var(--red);font-size:12px}
+  .search{position:relative;margin:14px 0}.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--slate400)}
+  .search input{width:100%;border:1px solid var(--slate200);border-radius:12px;padding:12px 12px 12px 40px;font-size:16px}.search input:focus{border-color:var(--amber)}
+  .sectit{display:flex;align-items:center;justify-content:space-between;margin:24px 0 4px}.sectit h2{font-size:18px;color:var(--slate900)}
+  /* kpis */
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+  @media(min-width:560px){.kpis{grid-template-columns:repeat(4,1fr)}}
+  .kpi{background:#fff;border:1px solid var(--slate200);border-radius:16px;padding:16px}
+  .kpi .ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:10px}
+  .kpi .n{font-size:24px;font-weight:800;color:var(--slate900)}.kpi .l{font-size:12px;color:var(--slate400)}
+  /* chart */
+  .chart{background:#fff;border:1px solid var(--slate200);border-radius:16px;padding:18px;margin-top:14px}
+  .chart .ct{font-weight:700;color:var(--slate700);margin-bottom:14px}
+  .bars{display:flex;align-items:flex-end;gap:10px;height:160px}
+  .barcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .bar{width:100%;background:var(--slate700);border-radius:7px 7px 0 0;min-height:3px;transition:.3s}
+  .barv{font-size:12px;font-weight:700;color:var(--slate700);margin-bottom:4px}
+  .barn{font-size:11px;color:var(--slate400);margin-top:6px;text-align:center;word-break:break-word}
+  .empty{text-align:center;color:var(--slate400);padding:60px 0}
+  /* modal */
+  .ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+  @media(min-width:560px){.ov{align-items:center;padding:16px}}
+  .modal{background:#fff;width:100%;max-width:520px;border-radius:18px 18px 0 0;max-height:90vh;overflow:auto}
+  @media(min-width:560px){.modal{border-radius:18px}}
+  .mhead{position:sticky;top:0;background:var(--slate900);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+  .mhead b{font-size:18px}.mhead small{color:var(--slate400);font-size:13px}
+  .mbody{padding:20px}
+  .stat3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+  .stat{background:var(--slate50);border-radius:12px;padding:12px;text-align:center}.stat .n{font-size:22px;font-weight:800}.stat .l{font-size:12px;color:var(--slate400)}
+  .drow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--slate100);font-size:14px}.drow .k{color:var(--slate500)}.drow .v{font-weight:600;text-align:right}
+  .toast{position:fixed;top:calc(16px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:60;background:var(--emerald);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  /* print */
+  .print-area{display:none}
+  @media print{
+    body{background:#fff}#app{display:none!important}.toast{display:none!important}
+    .print-area{display:block;padding:10px;color:#000}
+    @page{margin:1.4cm}
+    table{width:100%;border-collapse:collapse}
+  }
+</style>
+
+<div id="app"></div>
+<div id="print-area" class="print-area"></div>
+
+<script>
+const KEY="ht-pwa-records-v1";
+const SHIFTS=["T1","T2","T3"];
+const ACCOUNTS=[
+  {user:"operador",pass:"1234",name:"Operador Demo",role:"operador"},
+  {user:"gerente",pass:"1234",name:"Gerente Demo",role:"gerente"},
+];
+
+/* storage shim: localStorage when hosted, memory fallback in sandbox */
+const mem={v:null};
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return mem.v||[]}}
+function save(v){mem.v=v;try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
+
+const S={user:null,records:load(),view:"inicio",step:1,form:newForm(),query:"",detail:null};
+function newForm(){return{orden:"",sku:"",descripcion:"",operador:"",maquina:"",fechaInicio:"",turnoInicio:"",horaInicio:"",fechaTermino:"",turnoTermino:"",horaTermino:"",piezasBuenas:"",scrapTipo:"unidades",scrapUnidades:"",pesoTotal:"",pesoPorPieza:""}}
+function today(){const d=new Date();return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function now(){const d=new Date();return p2(d.getHours())+":"+p2(d.getMinutes())}
+function p2(n){return String(n).padStart(2,"0")}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function scrapU(f){if(f.scrapTipo==="unidades")return Number(f.scrapUnidades)||0;const t=Number(f.pesoTotal)||0,p=Number(f.pesoPorPieza)||0;return p>0?Math.round(t/p):0}
+
+/* tiny icon set */
+const I={
+  clip:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>',
+  scan:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></svg>',
+  user:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
+  lock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+  fact:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21V9l6 4V9l6 4V5l6 0v16H3z"/></svg>',
+  cal:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>',
+  search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>',
+  check:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>',
+  plus:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  x:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  out:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
+  pdf:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>',
+};
+
+const $=s=>document.querySelector(s);
+const app=()=>$("#app");
+
+function render(){
+  if(!S.user){renderLogin();return}
+  if(S.user.role==="operador")renderOperator();else renderManager();
+}
+
+/* ---------- LOGIN ---------- */
+function renderLogin(){
+  app().innerHTML=`
+  <div class="login"><div class="login-card">
+    <div class="lo-head">
+      <div class="lo-logo">${I.clip}</div>
+      <h1>Hoja de Trabajo</h1><p>Producción · Manufactura</p>
+      <span class="badge-demo">VERSIÓN DEMO</span>
+    </div>
+    <div class="card">
+      <div class="stack">
+        <div class="ipos">${I.user}<input id="u" class="inp inp-icon" placeholder="Usuario"></div>
+        <div class="ipos">${I.lock}<input id="p" type="password" class="inp inp-icon" placeholder="Contraseña"></div>
+        <div id="lerr"></div>
+        <button class="btn btn-dark full" onclick="doLogin()">Entrar</button>
+      </div>
+      <div class="demo-accts"><p>Cuentas de demostración (toca para usar)</p>
+        <div class="acct-grid">
+          <button class="acct" onclick="quick(0)"><b>${I.user} Operador</b><small>operador / 1234</small></button>
+          <button class="acct" onclick="quick(1)"><b>${I.lock} Gerente</b><small>gerente / 1234</small></button>
+        </div>
+      </div>
+    </div>
+  </div></div>`;
+  $("#p").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
+}
+function quick(i){$("#u").value=ACCOUNTS[i].user;$("#p").value=ACCOUNTS[i].pass;$("#lerr").innerHTML=""}
+function doLogin(){
+  const u=$("#u").value.trim().toLowerCase(),p=$("#p").value.trim();
+  const a=ACCOUNTS.find(x=>x.user===u&&x.pass===p);
+  if(a){S.user=a;S.view="inicio";render()}
+  else $("#lerr").innerHTML=`<div class="err">${I.x} Usuario o contraseña incorrectos</div>`;
+}
+function logout(){S.user=null;render()}
+
+function topbar(right){
+  const r=S.user.role==="operador"?"Operador":"Gerente";
+  return `<div class="top"><div class="top-in">
+    <div class="brand"><div class="logo">${I.clip}</div><div><b>Hoja de Trabajo</b><small>${esc(S.user.name)} · ${r}</small></div></div>
+    <div class="row">${right||""}<button class="btn btn-ghost" onclick="logout()">${I.out} Salir</button></div>
+  </div></div>`;
+}
+
+/* ---------- OPERATOR ---------- */
+function renderOperator(){
+  const right=`<button class="btn btn-amber" onclick="startWizard()">${I.plus} Nuevo</button>`;
+  if(S.view==="wizard"){
+    app().innerHTML=topbar(right)+`<div class="wrap">${wizardHTML()}</div>`;
+    afterWizard();return;
+  }
+  const mine=S.records.filter(r=>r.createdBy===S.user.name).slice(0,5);
+  app().innerHTML=topbar(right)+`<div class="wrap"><div class="center pt40">
+    <div class="hero-ic">${I.clip}</div>
+    <h1 class="title">Hola, captura tu corrida</h1>
+    <p class="muted">Llena la hoja paso a paso. Al guardar, el gerente la verá.</p>
+    <button class="big-btn" onclick="startWizard()">${I.plus} Nueva hoja de trabajo</button>
+    ${mine.length?`<div style="text-align:left;margin-top:32px"><div class="summary-h" style="font-size:12px;font-weight:700;color:var(--slate400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Mis últimos registros</div>${mine.map(recCard).join("")}</div>`:""}
+  </div></div>`;
+}
+function startWizard(){S.form=newForm();S.step=1;S.view="wizard";render()}
+
+/* ---------- WIZARD ---------- */
+const STEPS=[["Orden"],["Operador"],["Máquina"],["Inicio"],["Resultados"],["Cierre"]];
+function stepper(){
+  let h='<div class="stepper">';
+  STEPS.forEach((s,i)=>{
+    const n=i+1,done=S.step>n,active=S.step===n;
+    h+=`<div class="stp"><div class="stp-col"><div class="dot ${active?"active":done?"done":""}">${done?I.check:n}</div><div class="stp-lbl ${active?"on":""}">${s[0]}</div></div>${i<5?`<div class="line ${done?"done":""}"></div>`:""}</div>`;
+  });
+  return h+"</div>";
+}
+function f(k){return esc(S.form[k])}
+function wizardHTML(){
+  return `<div class="pt24">${stepper()}<div class="panel">${stepBody()}</div>
+  <div class="nav">
+    ${S.step===1?`<button class="btn btn-lite" style="background:none;border:none;color:var(--slate500)" onclick="cancelW()">Cancelar</button>`:`<button class="btn btn-lite" style="background:none;border:none;color:var(--slate700)" onclick="goStep(${S.step-1})">← Atrás</button>`}
+    ${S.step<6?`<button id="nextb" class="btn btn-dark" onclick="goStep(${S.step+1})">${S.step===4?"Arrancar producción":"Siguiente"} →</button>`:`<button id="nextb" class="btn btn-green" onclick="saveRec()">${I.check} Guardar</button>`}
+  </div></div>`;
+}
+function cancelW(){S.view="inicio";render()}
+function goStep(n){if(n>S.step&&!canNext())return;if(n<1)return;S.step=n;render()}
+function stepBody(){
+  const F=S.form;
+  switch(S.step){
+    case 1:return title("Orden de producción","Escanea o captura la orden y el SKU.")+
+      scanField("orden","N° de orden","Escanea o escribe",1)+
+      scanField("sku","SKU de parte","Escanea o escribe el SKU")+
+      field("Descripción (opcional)",`<input class="inp" data-k="descripcion" value="${f('descripcion')}" placeholder="Ej. Soporte lateral">`);
+    case 2:return title("Operador","Escanea tu código para arrancar.")+scanField("operador","Código de operador","Escanea tu gafete / código",1);
+    case 3:return title("Máquina","Escanea el código de la máquina.")+scanField("maquina","Código de máquina","Escanea el código",1);
+    case 4:return title("Inicio de proceso","Fecha, turno y hora de arranque.")+
+      field("Fecha de inicio",`<input class="inp" type="date" data-k="fechaInicio" value="${f('fechaInicio')}">`)+
+      field("Turno",shifts("turnoInicio"))+
+      field("Hora de inicio",`<input class="inp" type="time" data-k="horaInicio" value="${f('horaInicio')}">`);
+    case 5:{const u=scrapU(F);return title("Resultados","Piezas buenas y scrap.")+
+      field("Piezas buenas (unidades)",`<input class="inp" type="number" min="0" inputmode="numeric" data-k="piezasBuenas" value="${f('piezasBuenas')}" placeholder="0">`)+
+      `<div class="field"><label class="lbl">Scrap — ¿cómo lo registras?</label>
+        <div class="seg"><button class="${F.scrapTipo==='unidades'?'on':''}" onclick="setScrap('unidades')">Por unidades</button><button class="${F.scrapTipo==='peso'?'on':''}" onclick="setScrap('peso')">Por peso (báscula)</button></div>
+        ${F.scrapTipo==='unidades'
+          ?field("Scrap (unidades)",`<input class="inp" type="number" min="0" inputmode="numeric" data-k="scrapUnidades" value="${f('scrapUnidades')}" placeholder="0">`)
+          :`<div class="scrapbox"><div class="note">⚠ Conversión manual de báscula</div>
+             <div class="g2">${field("Peso total (kg)",`<input class="inp" type="number" min="0" step="0.001" inputmode="decimal" data-k="pesoTotal" value="${f('pesoTotal')}" placeholder="0.000">`)}${field("Peso por pieza (kg)",`<input class="inp" type="number" min="0" step="0.001" inputmode="decimal" data-k="pesoPorPieza" value="${f('pesoPorPieza')}" placeholder="0.000">`)}</div>
+             <div class="calc"><span style="font-size:14px;color:var(--slate500)">Scrap equivalente</span><span class="v"><span id="calcv">${u}</span> <small style="font-size:13px;color:var(--slate400)">pzas</small></span></div>
+             <div class="formula">peso total ÷ peso por pieza = unidades</div></div>`}
+      </div>`;}
+    case 6:{const b=Number(F.piezasBuenas)||0,s=scrapU(F);return title("Cierre","Fecha, turno y hora de término.")+
+      field("Fecha de término",`<input class="inp" type="date" data-k="fechaTermino" value="${f('fechaTermino')}">`)+
+      field("Turno de término",shifts("turnoTermino"))+
+      field("Hora de término",`<input class="inp" type="time" data-k="horaTermino" value="${f('horaTermino')}">`)+
+      `<div class="summary"><div class="h">Resumen</div>
+        ${srow("Orden",F.orden||"—")}${srow("Máquina",F.maquina||"—")}
+        ${srow("Piezas buenas",`<span style="color:var(--emerald)">${b}</span>`)}${srow("Scrap",`<span style="color:var(--red)">${s}</span>`)}
+        ${srow("Total",`<b>${b+s}</b>`)}</div>`;}
+  }
+}
+function title(t,h){return `<div class="stitle">${I.clip}<h2>${t}</h2></div><div class="shint">${h}</div>`}
+function field(l,inner){return `<div class="field"><label class="lbl">${l}</label>${inner}</div>`}
+function scanField(k,l,ph,auto){return `<div class="field"><label class="lbl">${l}</label><div class="ipos">${I.scan}<input class="inp inp-icon" data-k="${k}" value="${f(k)}" placeholder="${ph}" ${auto?"data-auto=1":""}></div></div>`}
+function shifts(k){return `<div class="shifts">${SHIFTS.map(s=>`<button class="shift ${S.form[k]===s?'on':''}" onclick="setShift('${k}','${s}')">${s}</button>`).join("")}</div>`}
+function srow(k,v){return `<div class="srow"><span class="k">${k}</span><span class="val">${v}</span></div>`}
+function setShift(k,v){S.form[k]=v;render()}
+function setScrap(t){S.form.scrapTipo=t;render()}
+
+function afterWizard(){
+  // default dates
+  if(S.step===4&&!S.form.fechaInicio){S.form.fechaInicio=today();S.form.horaInicio=now();
+    const a=document.querySelector('[data-k="fechaInicio"]'),b=document.querySelector('[data-k="horaInicio"]');if(a)a.value=S.form.fechaInicio;if(b)b.value=S.form.horaInicio;}
+  if(S.step===6&&!S.form.fechaTermino){S.form.fechaTermino=today();S.form.horaTermino=now();
+    const a=document.querySelector('[data-k="fechaTermino"]'),b=document.querySelector('[data-k="horaTermino"]');if(a)a.value=S.form.fechaTermino;if(b)b.value=S.form.horaTermino;}
+  // bind inputs without re-render (keep focus)
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    el.addEventListener("input",e=>{
+      S.form[el.dataset.k]=e.target.value;
+      const c=document.getElementById("calcv");if(c)c.textContent=scrapU(S.form);
+      updateNext();
+    });
+  });
+  const a=document.querySelector("[data-auto]");if(a)setTimeout(()=>a.focus(),50);
+  updateNext();
+}
+function canNext(){const F=S.form;switch(S.step){
+  case 1:return F.orden.trim()&&F.sku.trim();
+  case 2:return F.operador.trim();
+  case 3:return F.maquina.trim();
+  case 4:return F.fechaInicio&&F.turnoInicio&&F.horaInicio;
+  case 5:if(F.piezasBuenas===""||Number(F.piezasBuenas)<0)return false;return F.scrapTipo==="unidades"?F.scrapUnidades!=="":(F.pesoTotal!==""&&Number(F.pesoPorPieza)>0);
+  case 6:return F.fechaTermino&&F.turnoTermino&&F.horaTermino;
+  default:return true;}}
+function updateNext(){const b=document.getElementById("nextb");if(b)b.disabled=!canNext()}
+
+function saveRec(){if(!canNext())return;
+  const F=S.form;
+  const rec=Object.assign({},F,{id:Date.now().toString(),scrapTotal:scrapU(F),createdBy:S.user.name,createdAt:new Date().toISOString()});
+  S.records=[rec,...S.records];save(S.records);
+  S.view="inicio";render();toast("Registro enviado al gerente");
+}
+
+function recCard(r){const b=Number(r.piezasBuenas)||0;
+  return `<button class="rec" onclick="openDetail('${r.id}')"><div>
+    <div><span class="ord">${esc(r.orden)}</span> <span class="pill">${esc(r.sku)}</span></div>
+    <div class="meta"><span>${I.fact} ${esc(r.maquina)}</span><span>${I.user} ${esc(r.operador)}</span><span>${I.cal} ${esc(r.fechaInicio)} ${esc(r.turnoInicio||"")}</span></div>
+  </div><div style="text-align:right"><div class="ok">${b}<span style="font-size:11px;color:var(--slate400)"> ok</span></div><div class="sc">${r.scrapTotal} scrap</div></div></button>`;
+}
+
+/* ---------- MANAGER ---------- */
+function renderManager(){
+  const recs=S.records;
+  const right=recs.length?`<button class="btn btn-amber" onclick="printAll()">${I.pdf} PDF</button>`:"";
+  if(!recs.length){
+    app().innerHTML=topbar(right)+`<div class="wrap"><div class="pt24"><div class="stitle">${I.clip}<h2>Panel del gerente</h2></div><div class="shint">Visibilidad total de lo capturado por los operadores</div><div class="empty">Aún no hay registros. Cuando un operador capture una hoja, aparecerá aquí.</div></div></div>`;
+    return;
+  }
+  const tb=recs.reduce((s,r)=>s+(Number(r.piezasBuenas)||0),0);
+  const ts=recs.reduce((s,r)=>s+(r.scrapTotal||0),0);
+  const tp=tb+ts,pct=tp>0?((ts/tp)*100).toFixed(1):"0.0";
+  const byM=Object.values(recs.reduce((a,r)=>{const k=r.maquina||"—";(a[k]=a[k]||{name:k,v:0}).v+=Number(r.piezasBuenas)||0;return a},{})).sort((a,b)=>b.v-a.v).slice(0,6);
+  const max=Math.max(1,...byM.map(x=>x.v));
+  const q=S.query.toLowerCase();
+  const filt=recs.filter(r=>!q||[r.orden,r.sku,r.maquina,r.operador,r.createdBy].some(x=>(x||"").toLowerCase().includes(q)));
+
+  app().innerHTML=topbar(right)+`<div class="wrap">
+    <div class="pt24"><div class="stitle">${I.clip}<h2>Panel del gerente</h2></div><div class="shint">Visibilidad total de lo capturado por los operadores</div></div>
+    <div class="kpis">
+      ${kpi("var(--slate900)",recs.length,"Registros")}
+      ${kpi("var(--emerald)",tb.toLocaleString(),"Piezas buenas")}
+      ${kpi("var(--red)",ts.toLocaleString(),"Scrap total")}
+      ${kpi("var(--amber)",pct+"%","% Scrap")}
+    </div>
+    <div class="chart"><div class="ct">Piezas buenas por máquina</div><div class="bars">
+      ${byM.map(x=>`<div class="barcol"><div class="barv">${x.v}</div><div class="bar" style="height:${Math.round(x.v/max*100)}%"></div><div class="barn">${esc(x.name)}</div></div>`).join("")}
+    </div></div>
+    <div class="sectit"><h2>Todos los registros</h2><button class="btn btn-lite" onclick="printAll()">${I.pdf} Descargar PDF</button></div>
+    <div class="search">${I.search}<input id="q" value="${esc(S.query)}" placeholder="Buscar orden, SKU, máquina, operador…"></div>
+    <div id="reclist">${filt.length?filt.map(recCard).join(""):`<p class="empty">Sin resultados</p>`}</div>
+  </div>`;
+  const qi=$("#q");if(qi)qi.addEventListener("input",e=>{S.query=e.target.value;const fl=S.records.filter(r=>{const qq=S.query.toLowerCase();return !qq||[r.orden,r.sku,r.maquina,r.operador,r.createdBy].some(x=>(x||"").toLowerCase().includes(qq))});$("#reclist").innerHTML=fl.length?fl.map(recCard).join(""):`<p class="empty">Sin resultados</p>`});
+}
+function kpi(c,n,l){return `<div class="kpi"><div class="ic" style="background:${c}">${I.clip}</div><div class="n">${n}</div><div class="l">${l}</div></div>`}
+
+/* ---------- DETAIL MODAL ---------- */
+function openDetail(id){S.detail=S.records.find(r=>r.id===id);renderModal()}
+function closeDetail(){S.detail=null;const m=$("#ov");if(m)m.remove()}
+function renderModal(){
+  const r=S.detail;if(!r)return;const b=Number(r.piezasBuenas)||0,t=b+r.scrapTotal;
+  const drow=(k,v)=>`<div class="drow"><span class="k">${k}</span><span class="v">${v||"—"}</span></div>`;
+  const el=document.createElement("div");el.className="ov";el.id="ov";el.onclick=e=>{if(e.target===el)closeDetail()};
+  el.innerHTML=`<div class="modal">
+    <div class="mhead"><div><b>${esc(r.orden)}</b><div><small>${esc(r.sku)} ${r.descripcion?"· "+esc(r.descripcion):""}</small></div></div><button onclick="closeDetail()" style="color:#fff;padding:6px">${I.x}</button></div>
+    <div class="mbody">
+      <div class="stat3"><div class="stat"><div class="n" style="color:var(--emerald)">${b}</div><div class="l">Buenas</div></div><div class="stat"><div class="n" style="color:var(--red)">${r.scrapTotal}</div><div class="l">Scrap</div></div><div class="stat"><div class="n">${t}</div><div class="l">Total</div></div></div>
+      ${drow("Capturado por",esc(r.createdBy))}${drow("Máquina",esc(r.maquina))}${drow("Operador",esc(r.operador))}
+      ${drow("Inicio",esc(r.fechaInicio)+" "+esc(r.horaInicio)+" · "+esc(r.turnoInicio))}
+      ${drow("Término",esc(r.fechaTermino)+" "+esc(r.horaTermino)+" · "+esc(r.turnoTermino))}
+      ${r.scrapTipo==="peso"?drow("Scrap por peso",esc(r.pesoTotal)+" kg ÷ "+esc(r.pesoPorPieza)+" kg/pza"):""}
+      <button class="btn btn-dark full" style="margin-top:18px" onclick="printOne()">${I.pdf} Descargar PDF</button>
+    </div></div>`;
+  document.body.appendChild(el);
+}
+
+/* ---------- PRINT ---------- */
+function printHead(sub){return `<div style="border-bottom:3px solid #0f172a;padding-bottom:12px;margin-bottom:20px"><div style="font-size:22px;font-weight:800;color:#0f172a">Hoja de Trabajo — Producción</div><div style="font-size:13px;color:#475569;margin-top:2px">${sub}</div><div style="font-size:11px;color:#94a3b8;margin-top:4px">Generado el ${new Date().toLocaleString("es-MX")}</div></div>`}
+function printOne(){
+  const r=S.detail;if(!r)return;const b=Number(r.piezasBuenas)||0,t=b+r.scrapTotal;
+  const rows=[["Orden",r.orden],["SKU",r.sku],["Descripción",r.descripcion||"—"],["Máquina",r.maquina],["Operador",r.operador],["Capturado por",r.createdBy],["Inicio",`${r.fechaInicio} ${r.horaInicio} · Turno ${r.turnoInicio}`],["Término",`${r.fechaTermino} ${r.horaTermino} · Turno ${r.turnoTermino}`],["Piezas buenas",b+" u"],["Scrap",r.scrapTipo==="peso"?`${r.scrapTotal} pzas (${r.pesoTotal} kg ÷ ${r.pesoPorPieza} kg/pza)`:r.scrapTotal+" u"],["Total producido",t+" u"]];
+  $("#print-area").innerHTML=printHead(`Orden ${esc(r.orden)} · SKU ${esc(r.sku)}`)+`<table>${rows.map(x=>`<tr><td style="padding:8px 10px;border-bottom:1px solid #e2e8f0;font-size:13px;color:#64748b;width:40%">${esc(x[0])}</td><td style="padding:8px 10px;border-bottom:1px solid #e2e8f0;font-size:13px;font-weight:700">${esc(x[1])}</td></tr>`).join("")}</table><div style="display:flex;justify-content:space-between;margin-top:50px;font-size:12px"><div style="border-top:1px solid #0f172a;padding-top:6px;width:45%;text-align:center">Operador</div><div style="border-top:1px solid #0f172a;padding-top:6px;width:45%;text-align:center">Gerente</div></div>`;
+  window.print();
+}
+function printAll(){
+  const recs=S.records;
+  const th='padding:8px 6px;border-bottom:2px solid #0f172a;font-size:11px;text-align:left;color:#0f172a';
+  const td='padding:7px 6px;border-bottom:1px solid #e2e8f0;font-size:11px';
+  $("#print-area").innerHTML=printHead(`${recs.length} registros`)+`<table><thead><tr>
+    <th style="${th}">Orden</th><th style="${th}">SKU</th><th style="${th}">Máquina</th><th style="${th}">Operador</th><th style="${th}">Inicio</th><th style="${th}">Término</th><th style="${th};text-align:right">Buenas</th><th style="${th};text-align:right">Scrap</th>
+    </tr></thead><tbody>${recs.map(r=>`<tr><td style="${td};font-weight:700">${esc(r.orden)}</td><td style="${td}">${esc(r.sku)}</td><td style="${td}">${esc(r.maquina)}</td><td style="${td}">${esc(r.operador)}</td><td style="${td}">${esc(r.fechaInicio)} ${esc(r.turnoInicio||"")}</td><td style="${td}">${esc(r.fechaTermino)} ${esc(r.turnoTermino||"")}</td><td style="${td};text-align:right;font-weight:700">${Number(r.piezasBuenas)||0}</td><td style="${td};text-align:right">${r.scrapTotal}</td></tr>`).join("")}</tbody></table>`;
+  window.print();
+}
+
+/* ---------- TOAST ---------- */
+function toast(msg){const t=document.createElement("div");t.className="toast";t.innerHTML=I.check+" "+esc(msg);document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+
+/* ---------- ICON + MANIFEST (self-contained) ---------- */
+function makeIcon(size){
+  const c=document.createElement("canvas");c.width=c.height=size;const x=c.getContext("2d");
+  const r=size*0.22;
+  x.fillStyle="#0f172a";roundRect(x,0,0,size,size,r);x.fill();
+  const m=size*0.26,s=size-m*2;
+  x.fillStyle="#fbbf24";roundRect(x,m,m*1.05,s,s*0.92,size*0.07);x.fill();
+  x.fillStyle="#0f172a";const cw=s*0.42,ch=size*0.1;roundRect(x,size/2-cw/2,m*0.78,cw,ch,ch*0.4);x.fill();
+  x.strokeStyle="#0f172a";x.lineWidth=size*0.035;x.lineCap="round";
+  const lx=m+s*0.22,lw=s*0.56;[0.42,0.58,0.74].forEach(p=>{x.beginPath();x.moveTo(lx,m+s*p);x.lineTo(lx+lw,m+s*p);x.stroke()});
+  return c.toDataURL("image/png");
+}
+function roundRect(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+function setupPWA(){
+  try{
+    const i180=makeIcon(180),i512=makeIcon(512);
+    document.getElementById("touch-icon").href=i180;
+    const man={name:"Hoja de Trabajo",short_name:"Hoja Trabajo",start_url:".",display:"standalone",background_color:"#0f172a",theme_color:"#0f172a",icons:[{src:i512,sizes:"512x512",type:"image/png"},{src:makeIcon(192),sizes:"192x192",type:"image/png"}]};
+    const blob=new Blob([JSON.stringify(man)],{type:"application/json"});
+    document.getElementById("manifest-link").href=URL.createObjectURL(blob);
+  }catch(e){}
+}
+
+setupPWA();
+render();
+</script>

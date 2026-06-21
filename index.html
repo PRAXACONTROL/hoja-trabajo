@@ -8,6 +8,7 @@
 <title>Hoja de Trabajo</title>
 <link id="touch-icon" rel="apple-touch-icon" href="">
 <link id="manifest-link" rel="manifest" href="">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <style>
   :root{--slate900:#0f172a;--slate800:#1e293b;--slate700:#334155;--slate500:#64748b;--slate400:#94a3b8;--slate200:#e2e8f0;--slate100:#f1f5f9;--slate50:#f8fafc;--amber:#fbbf24;--amber-d:#b45309;--amber-bg:#fffbeb;--emerald:#059669;--red:#ef4444;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
@@ -126,6 +127,18 @@
   .stat{background:var(--slate50);border-radius:12px;padding:12px;text-align:center}.stat .n{font-size:22px;font-weight:800}.stat .l{font-size:12px;color:var(--slate400)}
   .drow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--slate100);font-size:14px}.drow .k{color:var(--slate500)}.drow .v{font-weight:600;text-align:right}
   .toast{position:fixed;top:calc(16px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:60;background:var(--emerald);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  /* scan button + camera modal */
+  .scanbtn{margin-top:8px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--slate900);color:#fff;padding:12px;border-radius:12px;font-weight:600;font-size:15px}
+  .scanbtn:active{transform:scale(.98)}
+  .scan-ov{position:fixed;inset:0;background:#000;z-index:80;display:flex;flex-direction:column}
+  .scan-top{padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:space-between}
+  .scan-top b{font-size:16px}.scan-x{color:#fff;padding:6px}
+  #reader{flex:1;width:100%;overflow:hidden;background:#000;position:relative}
+  #reader video{width:100%!important;height:100%!important;object-fit:cover}
+  #reader img[alt="Info icon"]{display:none}
+  .scan-err{color:#fca5a5;font-size:13px;padding:0 18px 10px;text-align:center;background:#0f172a}
+  .scan-bottom{padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom));background:#0f172a;color:#cbd5e1;text-align:center;font-size:14px}
+  .scan-bottom .mbtn{margin-top:12px;width:100%;background:#fff;color:#0f172a;padding:13px;border-radius:12px;font-weight:700}
   /* print */
   .print-area{display:none}
   @media print{
@@ -174,6 +187,7 @@ const I={
   x:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
   out:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
   pdf:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>',
+  cam:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
 };
 
 const $=s=>document.querySelector(s);
@@ -301,7 +315,7 @@ function stepBody(){
 }
 function title(t,h){return `<div class="stitle">${I.clip}<h2>${t}</h2></div><div class="shint">${h}</div>`}
 function field(l,inner){return `<div class="field"><label class="lbl">${l}</label>${inner}</div>`}
-function scanField(k,l,ph,auto){return `<div class="field"><label class="lbl">${l}</label><div class="ipos">${I.scan}<input class="inp inp-icon" data-k="${k}" value="${f(k)}" placeholder="${ph}" ${auto?"data-auto=1":""}></div></div>`}
+function scanField(k,l,ph,auto){return `<div class="field"><label class="lbl">${l}</label><div class="ipos">${I.scan}<input class="inp inp-icon" data-k="${k}" value="${f(k)}" placeholder="${ph}" ${auto?"data-auto=1":""}></div><button class="scanbtn" onclick="openScanner('${k}','${l.replace(/'/g,'')}')">${I.cam} Escanear con cámara</button></div>`}
 function shifts(k){return `<div class="shifts">${SHIFTS.map(s=>`<button class="shift ${S.form[k]===s?'on':''}" onclick="setShift('${k}','${s}')">${s}</button>`).join("")}</div>`}
 function srow(k,v){return `<div class="srow"><span class="k">${k}</span><span class="val">${v}</span></div>`}
 function setShift(k,v){S.form[k]=v;render()}
@@ -423,6 +437,41 @@ function printAll(){
 
 /* ---------- TOAST ---------- */
 function toast(msg){const t=document.createElement("div");t.className="toast";t.innerHTML=I.check+" "+esc(msg);document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+
+/* ---------- CAMERA SCANNER ---------- */
+let _scanner=null,_scanField=null;
+function openScanner(k,label){
+  _scanField=k;
+  const ov=document.createElement("div");ov.className="scan-ov";ov.id="scanov";
+  ov.innerHTML=`<div class="scan-top"><b>Escanear ${esc(label)}</b><button class="scan-x" onclick="closeScanner()">${I.x}</button></div>
+    <div id="reader"></div>
+    <div id="scanerr" class="scan-err"></div>
+    <div class="scan-bottom">Apunta la cámara al código de barras o QR<button class="mbtn" onclick="closeScanner()">Capturar manualmente</button></div>`;
+  document.body.appendChild(ov);
+  startScan();
+}
+function startScan(){
+  if(typeof Html5Qrcode==="undefined"){scanErr("La librería de escaneo no cargó. Revisa tu conexión a internet e intenta de nuevo.");return}
+  try{_scanner=new Html5Qrcode("reader",{verbose:false})}catch(e){scanErr("No se pudo iniciar el escáner.");return}
+  const cfg={fps:10,qrbox:{width:260,height:170},aspectRatio:1.6};
+  _scanner.start({facingMode:"environment"},cfg,onScan,()=>{}).catch(()=>{
+    scanErr("No se pudo abrir la cámara. Otorga permiso de cámara en Safari, o usa 'Capturar manualmente'. (Dentro del editor la cámara puede estar bloqueada; en el sitio publicado funciona.)");
+  });
+}
+function onScan(text){
+  S.form[_scanField]=text;
+  const inp=document.querySelector('[data-k="'+_scanField+'"]');if(inp)inp.value=text;
+  if(typeof updateNext==="function")updateNext();
+  const c=document.getElementById("calcv");if(c)c.textContent=scrapU(S.form);
+  closeScanner();
+  toast("Escaneado: "+text);
+}
+function scanErr(m){const e=document.getElementById("scanerr");if(e)e.textContent=m}
+function closeScanner(){
+  const done=()=>{const ov=document.getElementById("scanov");if(ov)ov.remove()};
+  if(_scanner){_scanner.stop().then(()=>{try{_scanner.clear()}catch(e){}_scanner=null;done()}).catch(()=>{_scanner=null;done()})}
+  else done();
+}
 
 /* ---------- ICON + MANIFEST (self-contained) ---------- */
 function makeIcon(size){

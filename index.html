@@ -2,500 +2,325 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Hoja de Trabajo">
-<meta name="theme-color" content="#0f172a">
-<title>Hoja de Trabajo</title>
+<meta name="theme-color" content="#15314F">
+<title>Hoja de Trabajo · RIVULIS</title>
 <link id="touch-icon" rel="apple-touch-icon" href="">
 <link id="manifest-link" rel="manifest" href="">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <style>
-  :root{--slate900:#0f172a;--slate800:#1e293b;--slate700:#334155;--slate500:#64748b;--slate400:#94a3b8;--slate200:#e2e8f0;--slate100:#f1f5f9;--slate50:#f8fafc;--amber:#fbbf24;--amber-d:#b45309;--amber-bg:#fffbeb;--emerald:#059669;--red:#ef4444;}
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--slate100);color:var(--slate800);-webkit-font-smoothing:antialiased}
-  button,input{font-family:inherit}
-  button{cursor:pointer;border:none;background:none}
-  input{outline:none}
-  .wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
-  /* top bar */
-  .top{background:var(--slate900);color:#fff;position:sticky;top:0;z-index:30;box-shadow:0 1px 4px rgba(0,0,0,.2);padding-top:env(safe-area-inset-top)}
-  .top-in{max-width:760px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+  :root{--navy:#15314F;--blue:#3880C8;--ink:#0f172a;--sub:#475569;--mut:#94a3b8;--line:#e2e8f0;--bg:#eef2f6;--soft:#eff6ff;--green:#059669;--red:#ef4444}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+  button,input,select{font-family:inherit}button{cursor:pointer;border:none;background:none}input,select{outline:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px 90px}
+  .top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:30;box-shadow:0 1px 4px rgba(0,0,0,.2);padding-top:env(safe-area-inset-top)}
+  .top-in{max-width:760px;margin:0 auto;padding:11px 16px;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;align-items:center;gap:10px}
-  .logo{background:var(--amber);color:var(--slate900);width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800}
-  .brand b{font-size:15px;line-height:1.1}.brand small{font-size:11px;color:var(--slate400);display:flex;align-items:center;gap:4px}
+  .logo{background:var(--blue);color:#fff;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .brand b{font-size:14px;line-height:1.1}.brand small{font-size:11px;color:#9db8d6;display:block}
   .row{display:flex;align-items:center;gap:6px}
-  .btn{padding:9px 13px;border-radius:10px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:.15s}
-  .btn-amber{background:var(--amber);color:var(--slate900)}.btn-amber:active{transform:scale(.97)}
-  .btn-ghost{color:#fff}.btn-ghost:active{background:var(--slate700)}
-  .btn-dark{background:var(--slate900);color:#fff}.btn-dark:active{transform:scale(.97)}
-  .btn-dark:disabled{opacity:.3}
-  .btn-green{background:var(--emerald);color:#fff}
-  .btn-lite{background:#fff;border:1px solid var(--slate200);color:var(--slate700)}
-  /* login */
-  .login{min-height:100vh;background:var(--slate900);display:flex;align-items:center;justify-content:center;padding:20px}
-  .login-card{width:100%;max-width:360px}
-  .lo-head{text-align:center;margin-bottom:26px}
-  .lo-logo{background:var(--amber);color:var(--slate900);width:62px;height:62px;border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
-  .lo-head h1{color:#fff;font-size:24px}.lo-head p{color:var(--slate400);font-size:14px;margin-top:4px}
-  .badge-demo{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;background:rgba(251,191,36,.2);color:var(--amber);padding:3px 9px;border-radius:99px}
-  .card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-  .inp{width:100%;border:2px solid var(--slate200);border-radius:12px;padding:13px 14px;font-size:16px;transition:.15s}
-  .inp:focus{border-color:var(--amber)}
-  .inp-icon{padding-left:42px}
-  .ipos{position:relative}.ipos svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--slate400)}
-  .stack>*+*{margin-top:12px}
+  .btn{padding:9px 13px;border-radius:10px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+  .btn-blue{background:var(--blue);color:#fff}.btn-ghost{color:#fff}.btn-ghost:active{background:#23476e}
+  .btn-dark{background:var(--navy);color:#fff}.btn-dark:disabled{opacity:.3}
+  .btn-green{background:var(--green);color:#fff}
+  .login{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px}
+  .lc{width:100%;max-width:360px}
+  .lh{text-align:center;margin-bottom:24px}
+  .lh .lg{background:var(--blue);width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:20px;color:#fff}
+  .lh h1{color:#fff;font-size:21px}.lh p{color:#9db8d6;font-size:13px;margin-top:3px}
+  .lh .badge{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;background:rgba(56,128,200,.25);color:#9db8d6;padding:3px 9px;border-radius:99px}
+  .card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .inp{width:100%;border:2px solid var(--line);border-radius:11px;padding:12px 13px;font-size:16px;transition:.15s}.inp:focus{border-color:var(--blue)}
+  .ipos{position:relative}.ipos .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--mut);font-size:15px}
+  .inp.pad{padding-left:38px}
+  .stack>*+*{margin-top:11px}
   .full{width:100%;justify-content:center;padding:13px}
-  .err{color:var(--red);font-size:14px;display:flex;align-items:center;gap:5px}
-  .demo-accts{margin-top:20px;padding-top:16px;border-top:1px solid var(--slate100)}
-  .demo-accts>p{font-size:12px;color:var(--slate400);text-align:center;margin-bottom:8px}
-  .acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .acct{border:1px solid var(--slate200);border-radius:12px;padding:10px;text-align:left;transition:.15s}
-  .acct:active{background:var(--slate50)}
-  .acct b{display:flex;align-items:center;gap:5px;color:var(--slate700);font-size:14px}
-  .acct small{font-size:11px;color:var(--slate400)}
-  /* generic */
-  .center{text-align:center}
-  .hero-ic{width:78px;height:78px;border-radius:20px;background:var(--amber);color:var(--slate900);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-  h1.title{font-size:23px;color:var(--slate900)} .muted{color:var(--slate500);margin-top:6px}
-  .pt40{padding-top:40px}.pt24{padding-top:24px}
-  .big-btn{background:var(--slate900);color:#fff;padding:16px 30px;border-radius:18px;font-weight:700;font-size:18px;display:inline-flex;align-items:center;gap:8px;margin-top:26px}
-  .big-btn:active{transform:scale(.98)}
-  /* stepper */
-  .stepper{display:flex;align-items:center;justify-content:space-between}
-  .stp{display:flex;align-items:center;flex:1}.stp:last-child{flex:none}
-  .stp-col{display:flex;flex-direction:column;align-items:center}
-  .dot{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--slate200);color:var(--slate400);font-weight:700;font-size:14px}
-  .dot.active{background:var(--amber);color:var(--slate900)}.dot.done{background:var(--emerald);color:#fff}
-  .stp-lbl{font-size:10px;margin-top:4px;color:var(--slate400);font-weight:600}.stp-lbl.on{color:var(--slate900)}
-  .line{height:2px;flex:1;margin:0 4px;margin-top:-18px;background:var(--slate200)}.line.done{background:var(--emerald)}
-  .panel{background:#fff;border-radius:18px;border:1px solid var(--slate200);padding:24px;margin-top:20px;min-height:320px}
-  .lbl{display:block;font-size:14px;font-weight:600;color:var(--slate500);margin-bottom:6px}
-  .stitle{display:flex;align-items:center;gap:8px;color:var(--slate900);margin-bottom:6px}.stitle h2{font-size:21px}
-  .shint{color:var(--slate500);font-size:14px;margin-bottom:20px}
-  .field+.field{margin-top:16px}
-  .nav{display:flex;align-items:center;justify-content:space-between;margin-top:20px}
+  .err{color:var(--red);font-size:14px}
+  .accts{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}
+  .accts p{font-size:12px;color:var(--mut);text-align:center;margin-bottom:8px}
+  .ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .acct{border:1px solid var(--line);border-radius:11px;padding:10px;text-align:left}.acct b{font-size:14px;color:var(--navy)}.acct small{font-size:11px;color:var(--mut);display:block}
+  .center{text-align:center}.pt40{padding-top:38px}
+  .hero{width:74px;height:74px;border-radius:18px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:24px}
+  h1.t{font-size:22px;color:var(--navy)}.muted{color:var(--sub);margin-top:6px}
+  .big{background:var(--navy);color:#fff;padding:16px 28px;border-radius:16px;font-weight:700;font-size:17px;display:inline-flex;gap:8px;align-items:center;margin-top:24px}
+  .pt24{padding-top:20px}
+  .prog{display:flex;gap:5px;margin-bottom:6px}
+  .pg{flex:1;height:6px;border-radius:3px;background:var(--line)}.pg.on{background:var(--blue)}.pg.done{background:var(--green)}
+  .stepn{font-size:12px;color:var(--mut);margin-bottom:14px}
+  .panel{background:#fff;border-radius:16px;border:1px solid var(--line);padding:20px;min-height:300px}
+  .stitle{font-size:19px;font-weight:800;color:var(--navy);margin-bottom:3px}
+  .shint{color:var(--sub);font-size:13px;margin-bottom:16px}
+  .lbl{display:block;font-size:13px;font-weight:600;color:var(--sub);margin-bottom:5px}
+  .field+.field{margin-top:13px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .scanbtn{margin-top:7px;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--navy);color:#fff;padding:11px;border-radius:11px;font-weight:600;font-size:14px}
   .shifts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .shift{padding:14px;border-radius:12px;font-weight:800;font-size:18px;border:2px solid var(--slate200);background:#fff;color:var(--slate500)}
-  .shift.on{background:var(--slate900);color:#fff;border-color:var(--slate900)}
-  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-  .seg button{padding:12px;border-radius:12px;font-weight:600;border:2px solid var(--slate200);background:#fff;color:var(--slate500)}
-  .seg button.on{background:var(--slate900);color:#fff;border-color:var(--slate900)}
-  .scrapbox{background:var(--amber-bg);border:2px solid #fde68a;border-radius:12px;padding:16px}
-  .scrapbox .note{font-size:14px;color:var(--amber-d);font-weight:600;display:flex;align-items:center;gap:6px;margin-bottom:12px}
-  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .calc{background:#fff;border:1px solid #fde68a;border-radius:10px;padding:12px;display:flex;align-items:center;justify-content:between;justify-content:space-between;margin-top:12px}
-  .calc .v{font-size:24px;font-weight:800;color:var(--slate900)}
-  .formula{font-size:12px;color:var(--amber-d);margin-top:8px}
-  .summary{background:var(--slate50);border:1px solid var(--slate200);border-radius:12px;padding:16px;margin-top:8px}
-  .summary .h{font-size:11px;font-weight:700;color:var(--slate400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
-  .srow{display:flex;justify-content:space-between;font-size:14px;padding:3px 0}.srow .k{color:var(--slate500)}.srow .val{font-weight:600}
-  /* lists / cards */
-  .rec{width:100%;background:#fff;border:1px solid var(--slate200);border-radius:14px;padding:15px;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;transition:.15s}
-  .rec:active{border-color:var(--amber)}
-  .rec .ord{font-weight:800;color:var(--slate900)}
-  .pill{font-size:11px;background:var(--slate100);color:var(--slate500);padding:2px 8px;border-radius:99px}
-  .meta{font-size:13px;color:var(--slate500);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap}
-  .meta span{display:flex;align-items:center;gap:4px}
-  .ok{color:var(--emerald);font-weight:800;font-size:17px}.sc{color:var(--red);font-size:12px}
-  .search{position:relative;margin:14px 0}.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--slate400)}
-  .search input{width:100%;border:1px solid var(--slate200);border-radius:12px;padding:12px 12px 12px 40px;font-size:16px}.search input:focus{border-color:var(--amber)}
-  .sectit{display:flex;align-items:center;justify-content:space-between;margin:24px 0 4px}.sectit h2{font-size:18px;color:var(--slate900)}
-  /* kpis */
-  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-  @media(min-width:560px){.kpis{grid-template-columns:repeat(4,1fr)}}
-  .kpi{background:#fff;border:1px solid var(--slate200);border-radius:16px;padding:16px}
-  .kpi .ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:10px}
-  .kpi .n{font-size:24px;font-weight:800;color:var(--slate900)}.kpi .l{font-size:12px;color:var(--slate400)}
-  /* chart */
-  .chart{background:#fff;border:1px solid var(--slate200);border-radius:16px;padding:18px;margin-top:14px}
-  .chart .ct{font-weight:700;color:var(--slate700);margin-bottom:14px}
-  .bars{display:flex;align-items:flex-end;gap:10px;height:160px}
-  .barcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
-  .bar{width:100%;background:var(--slate700);border-radius:7px 7px 0 0;min-height:3px;transition:.3s}
-  .barv{font-size:12px;font-weight:700;color:var(--slate700);margin-bottom:4px}
-  .barn{font-size:11px;color:var(--slate400);margin-top:6px;text-align:center;word-break:break-word}
-  .empty{text-align:center;color:var(--slate400);padding:60px 0}
-  /* modal */
+  .shift{padding:12px;border-radius:11px;font-weight:800;font-size:17px;border:2px solid var(--line);background:#fff;color:var(--sub)}.shift.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .seg button{padding:11px;border-radius:11px;font-weight:700;border:2px solid var(--line);background:#fff;color:var(--sub)}.seg button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .conv{font-size:12px;color:var(--blue);margin-top:6px;font-weight:600}
+  .nav{display:flex;justify-content:space-between;margin-top:18px}
+  .rec{width:100%;background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;text-align:left;display:flex;justify-content:space-between;gap:12px;margin-top:9px}
+  .rec:active{border-color:var(--blue)}
+  .rec .o{font-weight:800;color:var(--navy)}
+  .pill{font-size:11px;background:#f1f5f9;color:var(--sub);padding:2px 8px;border-radius:99px}
+  .meta{font-size:12.5px;color:var(--sub);margin-top:5px}
+  .empty{text-align:center;color:var(--mut);padding:50px 0}
+  .search{position:relative;margin:12px 0}.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--mut)}
+  .search input{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 11px 11px 36px;font-size:16px}
+  .sectit{display:flex;justify-content:space-between;align-items:center;margin:18px 0 2px}.sectit h2{font-size:18px;color:var(--navy)}
   .ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:flex;align-items:flex-end;justify-content:center}
   @media(min-width:560px){.ov{align-items:center;padding:16px}}
-  .modal{background:#fff;width:100%;max-width:520px;border-radius:18px 18px 0 0;max-height:90vh;overflow:auto}
+  .modal{background:#fff;width:100%;max-width:560px;border-radius:18px 18px 0 0;max-height:92vh;overflow:auto}
   @media(min-width:560px){.modal{border-radius:18px}}
-  .mhead{position:sticky;top:0;background:var(--slate900);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
-  .mhead b{font-size:18px}.mhead small{color:var(--slate400);font-size:13px}
-  .mbody{padding:20px}
-  .stat3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
-  .stat{background:var(--slate50);border-radius:12px;padding:12px;text-align:center}.stat .n{font-size:22px;font-weight:800}.stat .l{font-size:12px;color:var(--slate400)}
-  .drow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--slate100);font-size:14px}.drow .k{color:var(--slate500)}.drow .v{font-weight:600;text-align:right}
-  .toast{position:fixed;top:calc(16px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:60;background:var(--emerald);color:#fff;padding:12px 20px;border-radius:12px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
-  /* scan button + camera modal */
-  .scanbtn{margin-top:8px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--slate900);color:#fff;padding:12px;border-radius:12px;font-weight:600;font-size:15px}
-  .scanbtn:active{transform:scale(.98)}
+  .mhead{position:sticky;top:0;background:var(--navy);color:#fff;padding:15px 18px;display:flex;justify-content:space-between;align-items:center}
+  .mhead b{font-size:17px}.mhead small{color:#9db8d6;font-size:12px}
+  .mbody{padding:16px 18px}
+  .drow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13.5px}.drow .k{color:var(--sub)}.drow .v{font-weight:600;text-align:right}
+  .toast{position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:60;background:var(--green);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
   .scan-ov{position:fixed;inset:0;background:#000;z-index:80;display:flex;flex-direction:column}
-  .scan-top{padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:space-between}
-  .scan-top b{font-size:16px}.scan-x{color:#fff;padding:6px}
-  #reader{flex:1;width:100%;overflow:hidden;background:#000;position:relative}
-  #reader video{width:100%!important;height:100%!important;object-fit:cover}
-  #reader img[alt="Info icon"]{display:none}
-  .scan-err{color:#fca5a5;font-size:13px;padding:0 18px 10px;text-align:center;background:#0f172a}
-  .scan-bottom{padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom));background:#0f172a;color:#cbd5e1;text-align:center;font-size:14px}
-  .scan-bottom .mbtn{margin-top:12px;width:100%;background:#fff;color:#0f172a;padding:13px;border-radius:12px;font-weight:700}
-  /* print */
-  .print-area{display:none}
-  @media print{
-    body{background:#fff}#app{display:none!important}.toast{display:none!important}
-    .print-area{display:block;padding:10px;color:#000}
-    @page{margin:1.4cm}
-    table{width:100%;border-collapse:collapse}
-  }
+  .scan-top{padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center}.scan-top b{font-size:16px}
+  #reader{flex:1;width:100%;overflow:hidden;background:#000}#reader video{width:100%!important;height:100%!important;object-fit:cover}
+  .scan-err{color:#fca5a5;font-size:13px;padding:0 18px 10px;text-align:center;background:var(--navy)}
+  .scan-bottom{padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom));background:var(--navy);color:#cbd5e1;text-align:center;font-size:14px}
+  .scan-bottom .mbtn{margin-top:12px;width:100%;background:#fff;color:var(--navy);padding:13px;border-radius:12px;font-weight:700}
+  #printarea{display:none}
+  @media print{body{background:#fff}#app{display:none!important}.toast{display:none!important}#printarea{display:block}@page{margin:1.2cm}}
+  .rsheet{font-family:Arial,sans-serif;color:#000;max-width:740px;margin:0 auto}
+  .rstop{text-align:center;font-size:16px;font-weight:800;letter-spacing:1px;border:2px solid #000;padding:7px}
+  .rsprint{display:flex;justify-content:space-between;font-size:11px;padding:4px 2px 8px}
+  .rsheet table{width:100%;border-collapse:collapse}
+  .rsheet td{border:1.3px solid #000;padding:6px 8px;font-size:12.5px}
+  .rsheet .l{font-weight:700;width:46%;background:#f3f4f6}
+  .rsheet .sect{background:#15314F;color:#fff;font-weight:700;text-align:center;font-size:12px}
+  .rsheet .sub{font-weight:700;background:#fafafa;text-align:center}
+  .rsheet .mono{font-family:Consolas,monospace;font-weight:700}
+  .rsheet .rl{font-weight:800;text-align:center;background:#f3f4f6;width:30px}
+  .rsfoot{text-align:center;font-size:10.5px;color:#475569;margin-top:10px}
 </style>
 
 <div id="app"></div>
-<div id="print-area" class="print-area"></div>
+<div id="printarea"></div>
 
 <script>
-const KEY="ht-pwa-records-v1";
+const KEY="hoja-runsheets-v2";
 const SHIFTS=["T1","T2","T3"];
 const ACCOUNTS=[
   {user:"operador",pass:"1234",name:"Operador Demo",role:"operador"},
   {user:"gerente",pass:"1234",name:"Gerente Demo",role:"gerente"},
 ];
-
-/* storage shim: localStorage when hosted, memory fallback in sandbox */
 const mem={v:null};
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return mem.v||[]}}
 function save(v){mem.v=v;try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
 
-const S={user:null,records:load(),view:"inicio",step:1,form:newForm(),query:"",detail:null};
-function newForm(){return{orden:"",sku:"",descripcion:"",operador:"",maquina:"",fechaInicio:"",turnoInicio:"",horaInicio:"",fechaTermino:"",turnoTermino:"",horaTermino:"",piezasBuenas:"",scrapTipo:"unidades",scrapUnidades:"",pesoTotal:"",pesoPorPieza:""}}
-function today(){const d=new Date();return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function newForm(){return{producto:"",wo:"",filmLine:"",corrida:"",reel:"",calibre:"",blend:"HDPE",wu1:"",wu2:"",wu3:"",wu4:"",fechaInicio:"",turnoInicio:"",horaInicio:"",operadorInicio:"",fechaTermino:"",turnoTermino:"",horaTermino:"",operadorTermino:"",inspeccionadoPor:"",footage:"",scrapPeso:"",scrapUnidad:"lbs"}}
+const S={user:null,records:load(),view:"home",step:1,form:newForm(),query:"",detail:null};
+
+function today(){const d=new Date();return p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear()}
 function now(){const d=new Date();return p2(d.getHours())+":"+p2(d.getMinutes())}
 function p2(n){return String(n).padStart(2,"0")}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function scrapU(f){if(f.scrapTipo==="unidades")return Number(f.scrapUnidades)||0;const t=Number(f.pesoTotal)||0,p=Number(f.pesoPorPieza)||0;return p>0?Math.round(t/p):0}
+function conv(v,u){v=Number(v)||0;return u==="lbs"?`${v} lbs (${(v*0.453592).toFixed(1)} kg)`:`${v} kg (${(v/0.453592).toFixed(1)} lbs)`}
 
-/* tiny icon set */
-const I={
-  clip:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>',
-  scan:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></svg>',
-  user:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>',
-  lock:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
-  fact:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21V9l6 4V9l6 4V5l6 0v16H3z"/></svg>',
-  cal:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>',
-  search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>',
-  check:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>',
-  plus:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
-  x:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
-  out:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
-  pdf:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>',
-  cam:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
-};
-
+const ICO={user:'◑',lock:'▦',cam:'◎'};
 const $=s=>document.querySelector(s);
 const app=()=>$("#app");
+function render(){if(!S.user){renderLogin();return}if(S.user.role==="operador")renderOperator();else renderManager()}
 
-function render(){
-  if(!S.user){renderLogin();return}
-  if(S.user.role==="operador")renderOperator();else renderManager();
-}
-
-/* ---------- LOGIN ---------- */
 function renderLogin(){
-  app().innerHTML=`
-  <div class="login"><div class="login-card">
-    <div class="lo-head">
-      <div class="lo-logo">${I.clip}</div>
-      <h1>Hoja de Trabajo</h1><p>Producción · Manufactura</p>
-      <span class="badge-demo">VERSIÓN DEMO</span>
+  app().innerHTML=`<div class="login"><div class="lc">
+    <div class="lh"><div class="lg">PX</div><h1>Hoja de Trabajo</h1><p>PRAXA Control · RIVULIS</p><span class="badge">DEMO</span></div>
+    <div class="card"><div class="stack">
+      <div class="ipos"><span class="ic">${ICO.user}</span><input id="u" class="inp pad" placeholder="Usuario"></div>
+      <div class="ipos"><span class="ic">${ICO.lock}</span><input id="p" type="password" class="inp pad" placeholder="Contraseña"></div>
+      <div id="le"></div>
+      <button class="btn btn-dark full" onclick="doLogin()">Entrar</button>
     </div>
-    <div class="card">
-      <div class="stack">
-        <div class="ipos">${I.user}<input id="u" class="inp inp-icon" placeholder="Usuario"></div>
-        <div class="ipos">${I.lock}<input id="p" type="password" class="inp inp-icon" placeholder="Contraseña"></div>
-        <div id="lerr"></div>
-        <button class="btn btn-dark full" onclick="doLogin()">Entrar</button>
-      </div>
-      <div class="demo-accts"><p>Cuentas de demostración (toca para usar)</p>
-        <div class="acct-grid">
-          <button class="acct" onclick="quick(0)"><b>${I.user} Operador</b><small>operador / 1234</small></button>
-          <button class="acct" onclick="quick(1)"><b>${I.lock} Gerente</b><small>gerente / 1234</small></button>
-        </div>
-      </div>
-    </div>
+    <div class="accts"><p>Cuentas demo (toca para usar)</p><div class="ag">
+      <button class="acct" onclick="quick(0)"><b>Operador</b><small>operador / 1234</small></button>
+      <button class="acct" onclick="quick(1)"><b>Gerente</b><small>gerente / 1234</small></button>
+    </div></div></div>
   </div></div>`;
   $("#p").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
 }
-function quick(i){$("#u").value=ACCOUNTS[i].user;$("#p").value=ACCOUNTS[i].pass;$("#lerr").innerHTML=""}
-function doLogin(){
-  const u=$("#u").value.trim().toLowerCase(),p=$("#p").value.trim();
-  const a=ACCOUNTS.find(x=>x.user===u&&x.pass===p);
-  if(a){S.user=a;S.view="inicio";render()}
-  else $("#lerr").innerHTML=`<div class="err">${I.x} Usuario o contraseña incorrectos</div>`;
-}
+function quick(i){$("#u").value=ACCOUNTS[i].user;$("#p").value=ACCOUNTS[i].pass;$("#le").innerHTML=""}
+function doLogin(){const u=$("#u").value.trim().toLowerCase(),p=$("#p").value.trim();const a=ACCOUNTS.find(x=>x.user===u&&x.pass===p);if(a){S.user=a;S.view="home";render()}else $("#le").innerHTML='<div class="err">Usuario o contraseña incorrectos</div>'}
 function logout(){S.user=null;render()}
 
-function topbar(right){
-  const r=S.user.role==="operador"?"Operador":"Gerente";
-  return `<div class="top"><div class="top-in">
-    <div class="brand"><div class="logo">${I.clip}</div><div><b>Hoja de Trabajo</b><small>${esc(S.user.name)} · ${r}</small></div></div>
-    <div class="row">${right||""}<button class="btn btn-ghost" onclick="logout()">${I.out} Salir</button></div>
-  </div></div>`;
-}
+function topbar(right){return `<div class="top"><div class="top-in">
+  <div class="brand"><div class="logo">PX</div><div><b>Hoja de Trabajo</b><small>${esc(S.user.name)} · ${S.user.role==="operador"?"Operador":"Gerente"}</small></div></div>
+  <div class="row">${right||""}<button class="btn btn-ghost" onclick="logout()">Salir</button></div>
+</div></div>`}
 
-/* ---------- OPERATOR ---------- */
 function renderOperator(){
-  const right=`<button class="btn btn-amber" onclick="startWizard()">${I.plus} Nuevo</button>`;
-  if(S.view==="wizard"){
-    app().innerHTML=topbar(right)+`<div class="wrap">${wizardHTML()}</div>`;
-    afterWizard();return;
-  }
-  const mine=S.records.filter(r=>r.createdBy===S.user.name).slice(0,5);
+  const right=`<button class="btn btn-blue" onclick="startW()">+ Nuevo</button>`;
+  if(S.view==="wizard"){app().innerHTML=topbar(right)+`<div class="wrap">${wizardHTML()}</div>`;afterWizard();return}
+  const mine=S.records.filter(r=>r.createdBy===S.user.name).slice(0,6);
   app().innerHTML=topbar(right)+`<div class="wrap"><div class="center pt40">
-    <div class="hero-ic">${I.clip}</div>
-    <h1 class="title">Hola, captura tu corrida</h1>
-    <p class="muted">Llena la hoja paso a paso. Al guardar, el gerente la verá.</p>
-    <button class="big-btn" onclick="startWizard()">${I.plus} Nueva hoja de trabajo</button>
-    ${mine.length?`<div style="text-align:left;margin-top:32px"><div class="summary-h" style="font-size:12px;font-weight:700;color:var(--slate400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Mis últimos registros</div>${mine.map(recCard).join("")}</div>`:""}
+    <div class="hero">PX</div><h1 class="t">Nueva hoja de corrida</h1>
+    <p class="muted">Captura los datos del Film Line; al guardar se genera el Run Sheet en PDF.</p>
+    <button class="big" onclick="startW()">+ Nueva hoja de trabajo</button>
+    ${mine.length?`<div style="text-align:left;margin-top:30px"><div class="stepn" style="font-weight:700">Mis últimas hojas</div>${mine.map(recCard).join("")}</div>`:""}
   </div></div>`;
 }
-function startWizard(){S.form=newForm();S.step=1;S.view="wizard";render()}
+function startW(){S.form=newForm();S.step=1;S.view="wizard";render()}
 
-/* ---------- WIZARD ---------- */
-const STEPS=[["Orden"],["Operador"],["Máquina"],["Inicio"],["Resultados"],["Cierre"]];
-function stepper(){
-  let h='<div class="stepper">';
-  STEPS.forEach((s,i)=>{
-    const n=i+1,done=S.step>n,active=S.step===n;
-    h+=`<div class="stp"><div class="stp-col"><div class="dot ${active?"active":done?"done":""}">${done?I.check:n}</div><div class="stp-lbl ${active?"on":""}">${s[0]}</div></div>${i<5?`<div class="line ${done?"done":""}"></div>`:""}</div>`;
-  });
-  return h+"</div>";
-}
+const STEPS=6;
 function f(k){return esc(S.form[k])}
 function wizardHTML(){
-  return `<div class="pt24">${stepper()}<div class="panel">${stepBody()}</div>
+  let bars="";for(let i=1;i<=STEPS;i++)bars+=`<div class="pg ${S.step>i?'done':S.step===i?'on':''}"></div>`;
+  return `<div class="pt24"><div class="prog">${bars}</div><div class="stepn">Paso ${S.step} de ${STEPS}</div>
+  <div class="panel">${stepBody()}</div>
   <div class="nav">
-    ${S.step===1?`<button class="btn btn-lite" style="background:none;border:none;color:var(--slate500)" onclick="cancelW()">Cancelar</button>`:`<button class="btn btn-lite" style="background:none;border:none;color:var(--slate700)" onclick="goStep(${S.step-1})">← Atrás</button>`}
-    ${S.step<6?`<button id="nextb" class="btn btn-dark" onclick="goStep(${S.step+1})">${S.step===4?"Arrancar producción":"Siguiente"} →</button>`:`<button id="nextb" class="btn btn-green" onclick="saveRec()">${I.check} Guardar</button>`}
+    ${S.step===1?`<button class="btn" style="color:var(--sub)" onclick="cancelW()">Cancelar</button>`:`<button class="btn" style="color:var(--navy)" onclick="goStep(${S.step-1})">← Atrás</button>`}
+    ${S.step<STEPS?`<button id="nx" class="btn btn-dark" onclick="goStep(${S.step+1})">Siguiente →</button>`:`<button id="nx" class="btn btn-green" onclick="saveRec()">✓ Guardar y generar</button>`}
   </div></div>`;
 }
-function cancelW(){S.view="inicio";render()}
+function cancelW(){S.view="home";render()}
 function goStep(n){if(n>S.step&&!canNext())return;if(n<1)return;S.step=n;render()}
+
+function tF(label,k,ph,type){return `<div class="field"><label class="lbl">${label}</label><input class="inp" data-k="${k}" value="${f(k)}" placeholder="${ph||''}" ${type?`type="${type}"`:''}></div>`}
+function scanF(label,k,ph){return `<div class="field"><label class="lbl">${label}</label><input class="inp" data-k="${k}" value="${f(k)}" placeholder="${ph||''}"><button class="scanbtn" onclick="openScanner('${k}','${label.replace(/'/g,'')}')">${ICO.cam} Escanear con cámara</button></div>`}
+function shiftsF(label,k){return `<div class="field"><label class="lbl">${label}</label><div class="shifts">${SHIFTS.map(s=>`<button class="shift ${S.form[k]===s?'on':''}" onclick="setF('${k}','${s}')">${s}</button>`).join("")}</div></div>`}
+
 function stepBody(){
   const F=S.form;
   switch(S.step){
-    case 1:return title("Orden de producción","Escanea o captura la orden y el SKU.")+
-      scanField("orden","N° de orden","Escanea o escribe",1)+
-      scanField("sku","SKU de parte","Escanea o escribe el SKU")+
-      field("Descripción (opcional)",`<input class="inp" data-k="descripcion" value="${f('descripcion')}" placeholder="Ej. Soporte lateral">`);
-    case 2:return title("Operador","Escanea tu código para arrancar.")+scanField("operador","Código de operador","Escanea tu gafete / código",1);
-    case 3:return title("Máquina","Escanea el código de la máquina.")+scanField("maquina","Código de máquina","Escanea el código",1);
-    case 4:return title("Inicio de proceso","Fecha, turno y hora de arranque.")+
-      field("Fecha de inicio",`<input class="inp" type="date" data-k="fechaInicio" value="${f('fechaInicio')}">`)+
-      field("Turno",shifts("turnoInicio"))+
-      field("Hora de inicio",`<input class="inp" type="time" data-k="horaInicio" value="${f('horaInicio')}">`);
-    case 5:{const u=scrapU(F);return title("Resultados","Piezas buenas y scrap.")+
-      field("Piezas buenas (unidades)",`<input class="inp" type="number" min="0" inputmode="numeric" data-k="piezasBuenas" value="${f('piezasBuenas')}" placeholder="0">`)+
-      `<div class="field"><label class="lbl">Scrap — ¿cómo lo registras?</label>
-        <div class="seg"><button class="${F.scrapTipo==='unidades'?'on':''}" onclick="setScrap('unidades')">Por unidades</button><button class="${F.scrapTipo==='peso'?'on':''}" onclick="setScrap('peso')">Por peso (báscula)</button></div>
-        ${F.scrapTipo==='unidades'
-          ?field("Scrap (unidades)",`<input class="inp" type="number" min="0" inputmode="numeric" data-k="scrapUnidades" value="${f('scrapUnidades')}" placeholder="0">`)
-          :`<div class="scrapbox"><div class="note">⚠ Conversión manual de báscula</div>
-             <div class="g2">${field("Peso total (kg)",`<input class="inp" type="number" min="0" step="0.001" inputmode="decimal" data-k="pesoTotal" value="${f('pesoTotal')}" placeholder="0.000">`)}${field("Peso por pieza (kg)",`<input class="inp" type="number" min="0" step="0.001" inputmode="decimal" data-k="pesoPorPieza" value="${f('pesoPorPieza')}" placeholder="0.000">`)}</div>
-             <div class="calc"><span style="font-size:14px;color:var(--slate500)">Scrap equivalente</span><span class="v"><span id="calcv">${u}</span> <small style="font-size:13px;color:var(--slate400)">pzas</small></span></div>
-             <div class="formula">peso total ÷ peso por pieza = unidades</div></div>`}
-      </div>`;}
-    case 6:{const b=Number(F.piezasBuenas)||0,s=scrapU(F);return title("Cierre","Fecha, turno y hora de término.")+
-      field("Fecha de término",`<input class="inp" type="date" data-k="fechaTermino" value="${f('fechaTermino')}">`)+
-      field("Turno de término",shifts("turnoTermino"))+
-      field("Hora de término",`<input class="inp" type="time" data-k="horaTermino" value="${f('horaTermino')}">`)+
-      `<div class="summary"><div class="h">Resumen</div>
-        ${srow("Orden",F.orden||"—")}${srow("Máquina",F.maquina||"—")}
-        ${srow("Piezas buenas",`<span style="color:var(--emerald)">${b}</span>`)}${srow("Scrap",`<span style="color:var(--red)">${s}</span>`)}
-        ${srow("Total",`<b>${b+s}</b>`)}</div>`;}
+    case 1:return `<div class="stitle">Producto y orden</div><div class="shint">Identificación de la corrida.</div>
+      ${tF("Producto","producto","Ej. 508/243")}
+      ${scanF("Work Order (W.O.#)","wo","Escanea o escribe")}
+      ${tF("Film Line #","filmLine","Ej. 8")}`;
+    case 2:return `<div class="stitle">Rollo</div><div class="shint">Corrida, reel, calibre y blend.</div>
+      <div class="g2">${tF("Corrida (Run)","corrida","Ej. 279")}${tF("Rollo (Reel)","reel","Ej. 36")}</div>
+      <div class="g2" style="margin-top:13px">${tF("Calibre","calibre","")}${tF("Blend","blend","HDPE")}</div>`;
+    case 3:return `<div class="stitle">Números de rastreo (W/U)</div><div class="shint">Los 4 wind-ups del rollo. Se sugieren como Run-Reel-N.</div>
+      ${tF("W/U #1","wu1","")}${tF("W/U #2","wu2","")}${tF("W/U #3","wu3","")}${tF("W/U #4","wu4","")}`;
+    case 4:return `<div class="stitle">Inicio</div><div class="shint">Operador, fecha, turno y hora de arranque.</div>
+      ${scanF("Operador (inicio)","operadorInicio","Escanea gafete")}
+      ${tF("Fecha de inicio","fechaInicio","")}
+      ${shiftsF("Turno de inicio","turnoInicio")}
+      ${tF("Hora de inicio","horaInicio","","time")}`;
+    case 5:return `<div class="stitle">Cierre</div><div class="shint">Término e inspección.</div>
+      ${tF("Fecha de término","fechaTermino","")}
+      ${shiftsF("Turno que terminó","turnoTermino")}
+      ${tF("Hora de término","horaTermino","","time")}
+      ${tF("Operador (término)","operadorTermino","")}
+      ${tF("Inspeccionado por","inspeccionadoPor","Ej. ALFREDO")}`;
+    case 6:{const c=conv(F.scrapPeso,F.scrapUnidad);return `<div class="stitle">Producción y scrap</div><div class="shint">Footage y scrap por peso.</div>
+      ${tF("Footage (pies)","footage","Ej. 21930")}
+      <div class="field"><label class="lbl">Unidad de scrap</label><div class="seg">
+        <button class="${F.scrapUnidad==='lbs'?'on':''}" onclick="setF('scrapUnidad','lbs')">Libras (lbs)</button>
+        <button class="${F.scrapUnidad==='kg'?'on':''}" onclick="setF('scrapUnidad','kg')">Kilos (kg)</button></div></div>
+      <div class="field"><label class="lbl">Scrap (peso)</label><input class="inp" data-k="scrapPeso" type="number" step="0.1" inputmode="decimal" value="${f('scrapPeso')}" placeholder="0">
+        <div class="conv" id="convv">${Number(F.scrapPeso)?c:''}</div></div>`;}
   }
 }
-function title(t,h){return `<div class="stitle">${I.clip}<h2>${t}</h2></div><div class="shint">${h}</div>`}
-function field(l,inner){return `<div class="field"><label class="lbl">${l}</label>${inner}</div>`}
-function scanField(k,l,ph,auto){return `<div class="field"><label class="lbl">${l}</label><div class="ipos">${I.scan}<input class="inp inp-icon" data-k="${k}" value="${f(k)}" placeholder="${ph}" ${auto?"data-auto=1":""}></div><button class="scanbtn" onclick="openScanner('${k}','${l.replace(/'/g,'')}')">${I.cam} Escanear con cámara</button></div>`}
-function shifts(k){return `<div class="shifts">${SHIFTS.map(s=>`<button class="shift ${S.form[k]===s?'on':''}" onclick="setShift('${k}','${s}')">${s}</button>`).join("")}</div>`}
-function srow(k,v){return `<div class="srow"><span class="k">${k}</span><span class="val">${v}</span></div>`}
-function setShift(k,v){S.form[k]=v;render()}
-function setScrap(t){S.form.scrapTipo=t;render()}
-
+function setF(k,v){S.form[k]=v;render()}
 function afterWizard(){
-  // default dates
-  if(S.step===4&&!S.form.fechaInicio){S.form.fechaInicio=today();S.form.horaInicio=now();
-    const a=document.querySelector('[data-k="fechaInicio"]'),b=document.querySelector('[data-k="horaInicio"]');if(a)a.value=S.form.fechaInicio;if(b)b.value=S.form.horaInicio;}
-  if(S.step===6&&!S.form.fechaTermino){S.form.fechaTermino=today();S.form.horaTermino=now();
-    const a=document.querySelector('[data-k="fechaTermino"]'),b=document.querySelector('[data-k="horaTermino"]');if(a)a.value=S.form.fechaTermino;if(b)b.value=S.form.horaTermino;}
-  // bind inputs without re-render (keep focus)
-  document.querySelectorAll("[data-k]").forEach(el=>{
-    el.addEventListener("input",e=>{
-      S.form[el.dataset.k]=e.target.value;
-      const c=document.getElementById("calcv");if(c)c.textContent=scrapU(S.form);
-      updateNext();
-    });
-  });
-  const a=document.querySelector("[data-auto]");if(a)setTimeout(()=>a.focus(),50);
+  if(S.step===4&&!S.form.fechaInicio){S.form.fechaInicio=today();S.form.horaInicio=now();const a=document.querySelector('[data-k=fechaInicio]'),b=document.querySelector('[data-k=horaInicio]');if(a)a.value=today();if(b)b.value=S.form.horaInicio}
+  if(S.step===5&&!S.form.fechaTermino){S.form.fechaTermino=today();S.form.horaTermino=now();const a=document.querySelector('[data-k=fechaTermino]'),b=document.querySelector('[data-k=horaTermino]');if(a)a.value=today();if(b)b.value=S.form.horaTermino}
+  if(S.step===3){const F=S.form;if(F.corrida&&F.reel){[1,2,3,4].forEach(n=>{const k="wu"+n;if(!F[k]){F[k]=`${F.corrida}-${F.reel}-${n}`;const el=document.querySelector(`[data-k=${k}]`);if(el)el.value=F[k]}})}}
+  document.querySelectorAll("[data-k]").forEach(el=>el.addEventListener("input",e=>{S.form[el.dataset.k]=e.target.value;const c=document.getElementById("convv");if(c&&el.dataset.k==="scrapPeso")c.textContent=Number(S.form.scrapPeso)?conv(S.form.scrapPeso,S.form.scrapUnidad):"";updateNext()}));
   updateNext();
 }
 function canNext(){const F=S.form;switch(S.step){
-  case 1:return F.orden.trim()&&F.sku.trim();
-  case 2:return F.operador.trim();
-  case 3:return F.maquina.trim();
-  case 4:return F.fechaInicio&&F.turnoInicio&&F.horaInicio;
-  case 5:if(F.piezasBuenas===""||Number(F.piezasBuenas)<0)return false;return F.scrapTipo==="unidades"?F.scrapUnidades!=="":(F.pesoTotal!==""&&Number(F.pesoPorPieza)>0);
-  case 6:return F.fechaTermino&&F.turnoTermino&&F.horaTermino;
-  default:return true;}}
-function updateNext(){const b=document.getElementById("nextb");if(b)b.disabled=!canNext()}
+  case 1:return F.producto.trim()&&F.wo.trim()&&F.filmLine.trim();
+  case 2:return F.corrida.trim()&&F.reel.trim();
+  case 3:return true;
+  case 4:return F.operadorInicio.trim()&&F.fechaInicio&&F.turnoInicio&&F.horaInicio;
+  case 5:return F.fechaTermino&&F.turnoTermino&&F.horaTermino;
+  case 6:return F.footage.trim()&&F.scrapPeso!=="";
+  default:return true}}
+function updateNext(){const b=document.getElementById("nx");if(b)b.disabled=!canNext()}
 
-function saveRec(){if(!canNext())return;
-  const F=S.form;
-  const rec=Object.assign({},F,{id:Date.now().toString(),scrapTotal:scrapU(F),createdBy:S.user.name,createdAt:new Date().toISOString()});
-  S.records=[rec,...S.records];save(S.records);
-  S.view="inicio";render();toast("Registro enviado al gerente");
-}
+function saveRec(){if(!canNext())return;const rec=Object.assign({},S.form,{id:Date.now().toString(),createdBy:S.user.name,createdAt:new Date().toISOString(),fechaImpresion:today()+" "+now()});S.records=[rec,...S.records];save(S.records);S.view="home";render();toast("Run Sheet guardado");setTimeout(()=>{S.detail=rec;printSheet(rec)},300)}
 
-function recCard(r){const b=Number(r.piezasBuenas)||0;
-  return `<button class="rec" onclick="openDetail('${r.id}')"><div>
-    <div><span class="ord">${esc(r.orden)}</span> <span class="pill">${esc(r.sku)}</span></div>
-    <div class="meta"><span>${I.fact} ${esc(r.maquina)}</span><span>${I.user} ${esc(r.operador)}</span><span>${I.cal} ${esc(r.fechaInicio)} ${esc(r.turnoInicio||"")}</span></div>
-  </div><div style="text-align:right"><div class="ok">${b}<span style="font-size:11px;color:var(--slate400)"> ok</span></div><div class="sc">${r.scrapTotal} scrap</div></div></button>`;
-}
+function recCard(r){return `<button class="rec" onclick="openDetail('${r.id}')"><div>
+  <div><span class="o">${esc(r.producto)}</span> <span class="pill">W.O. ${esc(r.wo)}</span></div>
+  <div class="meta">FL ${esc(r.filmLine)} · Run ${esc(r.corrida)} · Reel ${esc(r.reel)} · ${esc(r.fechaInicio)} ${esc(r.turnoInicio)}</div>
+</div><div style="text-align:right"><div style="color:var(--red);font-weight:700">${esc(r.scrapPeso)} ${esc(r.scrapUnidad)}</div><div class="pill" style="margin-top:4px">PDF</div></div></button>`}
 
-/* ---------- MANAGER ---------- */
 function renderManager(){
-  const recs=S.records;
-  const right=recs.length?`<button class="btn btn-amber" onclick="printAll()">${I.pdf} PDF</button>`:"";
-  if(!recs.length){
-    app().innerHTML=topbar(right)+`<div class="wrap"><div class="pt24"><div class="stitle">${I.clip}<h2>Panel del gerente</h2></div><div class="shint">Visibilidad total de lo capturado por los operadores</div><div class="empty">Aún no hay registros. Cuando un operador capture una hoja, aparecerá aquí.</div></div></div>`;
-    return;
-  }
-  const tb=recs.reduce((s,r)=>s+(Number(r.piezasBuenas)||0),0);
-  const ts=recs.reduce((s,r)=>s+(r.scrapTotal||0),0);
-  const tp=tb+ts,pct=tp>0?((ts/tp)*100).toFixed(1):"0.0";
-  const byM=Object.values(recs.reduce((a,r)=>{const k=r.maquina||"—";(a[k]=a[k]||{name:k,v:0}).v+=Number(r.piezasBuenas)||0;return a},{})).sort((a,b)=>b.v-a.v).slice(0,6);
-  const max=Math.max(1,...byM.map(x=>x.v));
   const q=S.query.toLowerCase();
-  const filt=recs.filter(r=>!q||[r.orden,r.sku,r.maquina,r.operador,r.createdBy].some(x=>(x||"").toLowerCase().includes(q)));
-
-  app().innerHTML=topbar(right)+`<div class="wrap">
-    <div class="pt24"><div class="stitle">${I.clip}<h2>Panel del gerente</h2></div><div class="shint">Visibilidad total de lo capturado por los operadores</div></div>
-    <div class="kpis">
-      ${kpi("var(--slate900)",recs.length,"Registros")}
-      ${kpi("var(--emerald)",tb.toLocaleString(),"Piezas buenas")}
-      ${kpi("var(--red)",ts.toLocaleString(),"Scrap total")}
-      ${kpi("var(--amber)",pct+"%","% Scrap")}
+  const fl=S.records.filter(r=>!q||[r.producto,r.wo,r.filmLine,r.corrida,r.reel,r.operadorInicio,r.createdBy].some(x=>(x||"").toLowerCase().includes(q)));
+  const tScrap=S.records.reduce((s,r)=>s+(r.scrapUnidad==="kg"?(Number(r.scrapPeso)||0)/0.453592:(Number(r.scrapPeso)||0)),0);
+  app().innerHTML=topbar("")+`<div class="wrap">
+    <div class="pt24"><h1 class="t">Panel del gerente</h1><p class="muted" style="font-size:13px">Hojas de corrida capturadas por los operadores.</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px">
+      <div class="panel" style="min-height:auto;padding:14px"><div style="font-size:24px;font-weight:800;color:var(--navy)">${S.records.length}</div><div style="font-size:12px;color:var(--mut)">Run Sheets</div></div>
+      <div class="panel" style="min-height:auto;padding:14px"><div style="font-size:24px;font-weight:800;color:var(--red)">${tScrap.toFixed(0)} lbs</div><div style="font-size:12px;color:var(--mut)">Scrap total</div></div>
     </div>
-    <div class="chart"><div class="ct">Piezas buenas por máquina</div><div class="bars">
-      ${byM.map(x=>`<div class="barcol"><div class="barv">${x.v}</div><div class="bar" style="height:${Math.round(x.v/max*100)}%"></div><div class="barn">${esc(x.name)}</div></div>`).join("")}
-    </div></div>
-    <div class="sectit"><h2>Todos los registros</h2><button class="btn btn-lite" onclick="printAll()">${I.pdf} Descargar PDF</button></div>
-    <div class="search">${I.search}<input id="q" value="${esc(S.query)}" placeholder="Buscar orden, SKU, máquina, operador…"></div>
-    <div id="reclist">${filt.length?filt.map(recCard).join(""):`<p class="empty">Sin resultados</p>`}</div>
+    <div class="search"><span class="ic">⌕</span><input id="q" value="${esc(S.query)}" placeholder="Buscar producto, W.O., run, operador…"></div>
+    <div id="rl">${fl.length?fl.map(recCard).join(""):'<div class="empty">Sin registros aún.</div>'}</div>
   </div>`;
-  const qi=$("#q");if(qi)qi.addEventListener("input",e=>{S.query=e.target.value;const fl=S.records.filter(r=>{const qq=S.query.toLowerCase();return !qq||[r.orden,r.sku,r.maquina,r.operador,r.createdBy].some(x=>(x||"").toLowerCase().includes(qq))});$("#reclist").innerHTML=fl.length?fl.map(recCard).join(""):`<p class="empty">Sin resultados</p>`});
+  const qi=$("#q");if(qi)qi.addEventListener("input",e=>{S.query=e.target.value;const q2=S.query.toLowerCase();const f2=S.records.filter(r=>!q2||[r.producto,r.wo,r.filmLine,r.corrida,r.reel,r.operadorInicio,r.createdBy].some(x=>(x||"").toLowerCase().includes(q2)));$("#rl").innerHTML=f2.length?f2.map(recCard).join(""):'<div class="empty">Sin resultados</div>'});
 }
-function kpi(c,n,l){return `<div class="kpi"><div class="ic" style="background:${c}">${I.clip}</div><div class="n">${n}</div><div class="l">${l}</div></div>`}
 
-/* ---------- DETAIL MODAL ---------- */
 function openDetail(id){S.detail=S.records.find(r=>r.id===id);renderModal()}
 function closeDetail(){S.detail=null;const m=$("#ov");if(m)m.remove()}
-function renderModal(){
-  const r=S.detail;if(!r)return;const b=Number(r.piezasBuenas)||0,t=b+r.scrapTotal;
-  const drow=(k,v)=>`<div class="drow"><span class="k">${k}</span><span class="v">${v||"—"}</span></div>`;
+function renderModal(){const r=S.detail;if(!r)return;
+  const dr=(k,v)=>`<div class="drow"><span class="k">${k}</span><span class="v">${esc(v)||"—"}</span></div>`;
   const el=document.createElement("div");el.className="ov";el.id="ov";el.onclick=e=>{if(e.target===el)closeDetail()};
-  el.innerHTML=`<div class="modal">
-    <div class="mhead"><div><b>${esc(r.orden)}</b><div><small>${esc(r.sku)} ${r.descripcion?"· "+esc(r.descripcion):""}</small></div></div><button onclick="closeDetail()" style="color:#fff;padding:6px">${I.x}</button></div>
+  el.innerHTML=`<div class="modal"><div class="mhead"><div><b>${esc(r.producto)}</b><div><small>W.O. ${esc(r.wo)} · FL ${esc(r.filmLine)}</small></div></div><button onclick="closeDetail()" style="color:#fff;padding:6px">✕</button></div>
     <div class="mbody">
-      <div class="stat3"><div class="stat"><div class="n" style="color:var(--emerald)">${b}</div><div class="l">Buenas</div></div><div class="stat"><div class="n" style="color:var(--red)">${r.scrapTotal}</div><div class="l">Scrap</div></div><div class="stat"><div class="n">${t}</div><div class="l">Total</div></div></div>
-      ${drow("Capturado por",esc(r.createdBy))}${drow("Máquina",esc(r.maquina))}${drow("Operador",esc(r.operador))}
-      ${drow("Inicio",esc(r.fechaInicio)+" "+esc(r.horaInicio)+" · "+esc(r.turnoInicio))}
-      ${drow("Término",esc(r.fechaTermino)+" "+esc(r.horaTermino)+" · "+esc(r.turnoTermino))}
-      ${r.scrapTipo==="peso"?drow("Scrap por peso",esc(r.pesoTotal)+" kg ÷ "+esc(r.pesoPorPieza)+" kg/pza"):""}
-      <button class="btn btn-dark full" style="margin-top:18px" onclick="printOne()">${I.pdf} Descargar PDF</button>
+      ${dr("Corrida (Run)",r.corrida)}${dr("Rollo (Reel)",r.reel)}${dr("W/U",`${r.wu1} · ${r.wu2} · ${r.wu3} · ${r.wu4}`)}
+      ${dr("Blend / Calibre",`${r.blend} / ${r.calibre||"—"}`)}
+      ${dr("Inicio",`${r.fechaInicio} ${r.horaInicio} · ${r.turnoInicio} · ${r.operadorInicio}`)}
+      ${dr("Término",`${r.fechaTermino} ${r.horaTermino} · ${r.turnoTermino}`)}
+      ${dr("Inspeccionado por",r.inspeccionadoPor)}${dr("Footage",r.footage+" pies")}${dr("Scrap",conv(r.scrapPeso,r.scrapUnidad))}
+      <button class="btn btn-dark full" style="margin-top:16px" onclick="printSheet(window.__cur())">🖨 Imprimir Run Sheet (PDF)</button>
     </div></div>`;
   document.body.appendChild(el);
 }
+window.__cur=()=>S.detail;
 
-/* ---------- PRINT ---------- */
-function printHead(sub){return `<div style="border-bottom:3px solid #0f172a;padding-bottom:12px;margin-bottom:20px"><div style="font-size:22px;font-weight:800;color:#0f172a">Hoja de Trabajo — Producción</div><div style="font-size:13px;color:#475569;margin-top:2px">${sub}</div><div style="font-size:11px;color:#94a3b8;margin-top:4px">Generado el ${new Date().toLocaleString("es-MX")}</div></div>`}
-function printOne(){
-  const r=S.detail;if(!r)return;const b=Number(r.piezasBuenas)||0,t=b+r.scrapTotal;
-  const rows=[["Orden",r.orden],["SKU",r.sku],["Descripción",r.descripcion||"—"],["Máquina",r.maquina],["Operador",r.operador],["Capturado por",r.createdBy],["Inicio",`${r.fechaInicio} ${r.horaInicio} · Turno ${r.turnoInicio}`],["Término",`${r.fechaTermino} ${r.horaTermino} · Turno ${r.turnoTermino}`],["Piezas buenas",b+" u"],["Scrap",r.scrapTipo==="peso"?`${r.scrapTotal} pzas (${r.pesoTotal} kg ÷ ${r.pesoPorPieza} kg/pza)`:r.scrapTotal+" u"],["Total producido",t+" u"]];
-  $("#print-area").innerHTML=printHead(`Orden ${esc(r.orden)} · SKU ${esc(r.sku)}`)+`<table>${rows.map(x=>`<tr><td style="padding:8px 10px;border-bottom:1px solid #e2e8f0;font-size:13px;color:#64748b;width:40%">${esc(x[0])}</td><td style="padding:8px 10px;border-bottom:1px solid #e2e8f0;font-size:13px;font-weight:700">${esc(x[1])}</td></tr>`).join("")}</table><div style="display:flex;justify-content:space-between;margin-top:50px;font-size:12px"><div style="border-top:1px solid #0f172a;padding-top:6px;width:45%;text-align:center">Operador</div><div style="border-top:1px solid #0f172a;padding-top:6px;width:45%;text-align:center">Gerente</div></div>`;
-  window.print();
-}
-function printAll(){
-  const recs=S.records;
-  const th='padding:8px 6px;border-bottom:2px solid #0f172a;font-size:11px;text-align:left;color:#0f172a';
-  const td='padding:7px 6px;border-bottom:1px solid #e2e8f0;font-size:11px';
-  $("#print-area").innerHTML=printHead(`${recs.length} registros`)+`<table><thead><tr>
-    <th style="${th}">Orden</th><th style="${th}">SKU</th><th style="${th}">Máquina</th><th style="${th}">Operador</th><th style="${th}">Inicio</th><th style="${th}">Término</th><th style="${th};text-align:right">Buenas</th><th style="${th};text-align:right">Scrap</th>
-    </tr></thead><tbody>${recs.map(r=>`<tr><td style="${td};font-weight:700">${esc(r.orden)}</td><td style="${td}">${esc(r.sku)}</td><td style="${td}">${esc(r.maquina)}</td><td style="${td}">${esc(r.operador)}</td><td style="${td}">${esc(r.fechaInicio)} ${esc(r.turnoInicio||"")}</td><td style="${td}">${esc(r.fechaTermino)} ${esc(r.turnoTermino||"")}</td><td style="${td};text-align:right;font-weight:700">${Number(r.piezasBuenas)||0}</td><td style="${td};text-align:right">${r.scrapTotal}</td></tr>`).join("")}</tbody></table>`;
-  window.print();
+function printSheet(r){if(!r)return;$("#printarea").innerHTML=buildSheet(r);setTimeout(()=>window.print(),80)}
+function buildSheet(r){
+  const td=(l,v)=>`<tr><td class="l">${l}</td><td colspan="2">${esc(v)||"&nbsp;"}</td></tr>`;
+  return `<div class="rsheet">
+    <div class="rstop">FILM LINE RUN SHEET</div>
+    <div class="rsprint"><span><b>Números de rastreo FL</b></span><span>Fecha de impresión: <b>${esc(r.fechaImpresion||"")}</b></span></div>
+    <table>
+      <tr><td class="sect" colspan="3">IDENTIFICACIÓN</td></tr>
+      ${td("Producto",r.producto)}
+      <tr><td class="l">Work Order (W.O.#)</td><td colspan="2" class="mono">${esc(r.wo)}</td></tr>
+      ${td("Film Line #",r.filmLine)}${td("Corrida (Run)",r.corrida)}${td("Rollo (Reel)",r.reel)}
+      <tr><td class="sect" colspan="3">ROLLO — NÚMEROS DE RASTREO (W/U)</td></tr>
+      <tr><td class="rl" rowspan="4">R<br>O<br>L<br>L<br>O</td><td class="sub">W/U #1</td><td class="mono">${esc(r.wu1)}</td></tr>
+      <tr><td class="sub">W/U #2</td><td class="mono">${esc(r.wu2)}</td></tr>
+      <tr><td class="sub">W/U #3</td><td class="mono">${esc(r.wu3)}</td></tr>
+      <tr><td class="sub">W/U #4</td><td class="mono">${esc(r.wu4)}</td></tr>
+      ${td("Calibre",r.calibre)}${td("Blend",r.blend)}
+      <tr><td class="sect" colspan="3">OPERACIÓN</td></tr>
+      ${td("Fecha de inicio",r.fechaInicio)}${td("Turno de inicio",r.turnoInicio)}${td("Hora de inicio",r.horaInicio)}${td("Operador (inicio)",r.operadorInicio)}
+      ${td("Fecha de término",r.fechaTermino)}${td("Turno que terminó",r.turnoTermino)}${td("Hora de término",r.horaTermino)}${td("Operador (término)",r.operadorTermino)}
+      ${td("Inspeccionado por",r.inspeccionadoPor)}
+      <tr><td class="sect" colspan="3">PRODUCCIÓN Y SCRAP</td></tr>
+      <tr><td class="l">Footage (pies)</td><td colspan="2" class="mono">${esc(r.footage)}</td></tr>
+      ${td("Scrap Weight ("+esc(r.scrapUnidad)+")",conv(r.scrapPeso,r.scrapUnidad))}
+    </table>
+    <div class="rsfoot">Generado por el Sistema de Hoja de Trabajo · PRAXA Control · soporte@praxacontrol.com · +52 (664) 304-3903</div>
+  </div>`;
 }
 
-/* ---------- TOAST ---------- */
-function toast(msg){const t=document.createElement("div");t.className="toast";t.innerHTML=I.check+" "+esc(msg);document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent="✓ "+m;document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
 
-/* ---------- CAMERA SCANNER ---------- */
-let _scanner=null,_scanField=null;
-function openScanner(k,label){
-  _scanField=k;
-  const ov=document.createElement("div");ov.className="scan-ov";ov.id="scanov";
-  ov.innerHTML=`<div class="scan-top"><b>Escanear ${esc(label)}</b><button class="scan-x" onclick="closeScanner()">${I.x}</button></div>
-    <div id="reader"></div>
-    <div id="scanerr" class="scan-err"></div>
-    <div class="scan-bottom">Apunta la cámara al código de barras o QR<button class="mbtn" onclick="closeScanner()">Capturar manualmente</button></div>`;
-  document.body.appendChild(ov);
-  startScan();
-}
-function startScan(){
-  if(typeof Html5Qrcode==="undefined"){scanErr("La librería de escaneo no cargó. Revisa tu conexión a internet e intenta de nuevo.");return}
-  try{_scanner=new Html5Qrcode("reader",{verbose:false})}catch(e){scanErr("No se pudo iniciar el escáner.");return}
-  const cfg={fps:10,qrbox:{width:260,height:170},aspectRatio:1.6};
-  _scanner.start({facingMode:"environment"},cfg,onScan,()=>{}).catch(()=>{
-    scanErr("No se pudo abrir la cámara. Otorga permiso de cámara en Safari, o usa 'Capturar manualmente'. (Dentro del editor la cámara puede estar bloqueada; en el sitio publicado funciona.)");
-  });
-}
-function onScan(text){
-  S.form[_scanField]=text;
-  const inp=document.querySelector('[data-k="'+_scanField+'"]');if(inp)inp.value=text;
-  if(typeof updateNext==="function")updateNext();
-  const c=document.getElementById("calcv");if(c)c.textContent=scrapU(S.form);
-  closeScanner();
-  toast("Escaneado: "+text);
-}
+let _sc=null,_sf=null;
+function openScanner(k,label){_sf=k;const ov=document.createElement("div");ov.className="scan-ov";ov.id="scanov";
+  ov.innerHTML=`<div class="scan-top"><b>Escanear ${esc(label)}</b><button style="color:#fff" onclick="closeScanner()">✕</button></div><div id="reader"></div><div id="scanerr" class="scan-err"></div><div class="scan-bottom">Apunta al código de barras o QR<button class="mbtn" onclick="closeScanner()">Capturar manualmente</button></div>`;
+  document.body.appendChild(ov);startScan()}
+function startScan(){if(typeof Html5Qrcode==="undefined"){scanErr("La librería de escaneo no cargó (revisa internet).");return}
+  try{_sc=new Html5Qrcode("reader",{verbose:false})}catch(e){scanErr("No se pudo iniciar.");return}
+  _sc.start({facingMode:"environment"},{fps:10,qrbox:{width:260,height:170}},onScan,()=>{}).catch(()=>scanErr("No se pudo abrir la cámara. Da permiso en Safari/Chrome o captura manualmente. (En el editor la cámara puede estar bloqueada; en el sitio publicado funciona.)"))}
+function onScan(t){S.form[_sf]=t;const i=document.querySelector(`[data-k=${_sf}]`);if(i)i.value=t;if(typeof updateNext==="function")updateNext();closeScanner();toast("Escaneado: "+t)}
 function scanErr(m){const e=document.getElementById("scanerr");if(e)e.textContent=m}
-function closeScanner(){
-  const done=()=>{const ov=document.getElementById("scanov");if(ov)ov.remove()};
-  if(_scanner){_scanner.stop().then(()=>{try{_scanner.clear()}catch(e){}_scanner=null;done()}).catch(()=>{_scanner=null;done()})}
-  else done();
-}
+function closeScanner(){const done=()=>{const o=document.getElementById("scanov");if(o)o.remove()};if(_sc){_sc.stop().then(()=>{try{_sc.clear()}catch(e){}_sc=null;done()}).catch(()=>{_sc=null;done()})}else done()}
 
-/* ---------- ICON + MANIFEST (self-contained) ---------- */
-function makeIcon(size){
-  const c=document.createElement("canvas");c.width=c.height=size;const x=c.getContext("2d");
-  const r=size*0.22;
-  x.fillStyle="#0f172a";roundRect(x,0,0,size,size,r);x.fill();
-  const m=size*0.26,s=size-m*2;
-  x.fillStyle="#fbbf24";roundRect(x,m,m*1.05,s,s*0.92,size*0.07);x.fill();
-  x.fillStyle="#0f172a";const cw=s*0.42,ch=size*0.1;roundRect(x,size/2-cw/2,m*0.78,cw,ch,ch*0.4);x.fill();
-  x.strokeStyle="#0f172a";x.lineWidth=size*0.035;x.lineCap="round";
-  const lx=m+s*0.22,lw=s*0.56;[0.42,0.58,0.74].forEach(p=>{x.beginPath();x.moveTo(lx,m+s*p);x.lineTo(lx+lw,m+s*p);x.stroke()});
-  return c.toDataURL("image/png");
-}
-function roundRect(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
-function setupPWA(){
-  try{
-    const i180=makeIcon(180),i512=makeIcon(512);
-    document.getElementById("touch-icon").href=i180;
-    const man={name:"Hoja de Trabajo",short_name:"Hoja Trabajo",start_url:".",display:"standalone",background_color:"#0f172a",theme_color:"#0f172a",icons:[{src:i512,sizes:"512x512",type:"image/png"},{src:makeIcon(192),sizes:"192x192",type:"image/png"}]};
-    const blob=new Blob([JSON.stringify(man)],{type:"application/json"});
-    document.getElementById("manifest-link").href=URL.createObjectURL(blob);
-  }catch(e){}
-}
+function mkIcon(sz){const c=document.createElement("canvas");c.width=c.height=sz;const x=c.getContext("2d");rr(x,0,0,sz,sz,sz*0.22);x.fillStyle="#15314F";x.fill();x.fillStyle="#3880C8";rr(x,sz*0.24,sz*0.24,sz*0.52,sz*0.52,sz*0.10);x.fill();x.fillStyle="#fff";x.font="bold "+(sz*0.26)+"px Arial";x.textAlign="center";x.textBaseline="middle";x.fillText("PX",sz/2,sz*0.52);return c.toDataURL("image/png")}
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+try{document.getElementById("touch-icon").href=mkIcon(180);const man={name:"Hoja de Trabajo",short_name:"Hoja Trabajo",start_url:".",display:"standalone",background_color:"#15314F",theme_color:"#15314F",icons:[{src:mkIcon(512),sizes:"512x512",type:"image/png"},{src:mkIcon(192),sizes:"192x192",type:"image/png"}]};document.getElementById("manifest-link").href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:"application/json"}))}catch(e){}
 
-setupPWA();
 render();
 </script>

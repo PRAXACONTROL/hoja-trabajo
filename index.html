@@ -195,7 +195,7 @@ function stepBody(){
     case 2:return `<div class="stitle">Rollo</div><div class="shint">Corrida, reel, calibre y blend.</div>
       <div class="g2">${tF("Corrida (Run)","corrida","Ej. 279")}${tF("Rollo (Reel)","reel","Ej. 36")}</div>
       <div class="g2" style="margin-top:13px">${tF("Calibre","calibre","")}${tF("Blend","blend","HDPE")}</div>`;
-    case 3:return `<div class="stitle">Números de rastreo (W/U)</div><div class="shint">Los 4 wind-ups del rollo. Se sugieren como Run-Reel-N.</div>
+    case 3:return `<div class="stitle">Números de rastreo (W/U)</div><div class="shint">4 rollos por corrida (W/U #1–4). Se generan con el número de corrida.</div>
       ${tF("W/U #1","wu1","")}${tF("W/U #2","wu2","")}${tF("W/U #3","wu3","")}${tF("W/U #4","wu4","")}`;
     case 4:return `<div class="stitle">Inicio</div><div class="shint">Operador, fecha, turno y hora de arranque.</div>
       ${scanF("Operador (inicio)","operadorInicio","Escanea gafete")}
@@ -221,7 +221,7 @@ function setF(k,v){S.form[k]=v;render()}
 function afterWizard(){
   if(S.step===4&&!S.form.fechaInicio){S.form.fechaInicio=today();S.form.horaInicio=now();const a=document.querySelector('[data-k=fechaInicio]'),b=document.querySelector('[data-k=horaInicio]');if(a)a.value=today();if(b)b.value=S.form.horaInicio}
   if(S.step===5&&!S.form.fechaTermino){S.form.fechaTermino=today();S.form.horaTermino=now();const a=document.querySelector('[data-k=fechaTermino]'),b=document.querySelector('[data-k=horaTermino]');if(a)a.value=today();if(b)b.value=S.form.horaTermino}
-  if(S.step===3){const F=S.form;if(F.corrida&&F.reel){[1,2,3,4].forEach(n=>{const k="wu"+n;if(!F[k]){F[k]=`${F.corrida}-${F.reel}-${n}`;const el=document.querySelector(`[data-k=${k}]`);if(el)el.value=F[k]}})}}
+  if(S.step===3){const F=S.form;if(F.corrida){[1,2,3,4].forEach(n=>{const k="wu"+n;if(!F[k]){F[k]=`${F.corrida}-${n}`;const el=document.querySelector(`[data-k=${k}]`);if(el)el.value=F[k]}})}}
   document.querySelectorAll("[data-k]").forEach(el=>el.addEventListener("input",e=>{S.form[el.dataset.k]=e.target.value;const c=document.getElementById("convv");if(c&&el.dataset.k==="scrapPeso")c.textContent=Number(S.form.scrapPeso)?conv(S.form.scrapPeso,S.form.scrapUnidad):"";updateNext()}));
   updateNext();
 }
@@ -231,11 +231,11 @@ function canNext(){const F=S.form;switch(S.step){
   case 3:return true;
   case 4:return F.operadorInicio.trim()&&F.fechaInicio&&F.turnoInicio&&F.horaInicio;
   case 5:return F.fechaTermino&&F.turnoTermino&&F.horaTermino;
-  case 6:return F.footage.trim()&&F.scrapPeso!=="";
+  case 6:return F.scrapPeso!=="";
   default:return true}}
 function updateNext(){const b=document.getElementById("nx");if(b)b.disabled=!canNext()}
 
-function saveRec(){if(!canNext())return;const rec=Object.assign({},S.form,{id:Date.now().toString(),createdBy:S.user.name,createdAt:new Date().toISOString(),fechaImpresion:today()+" "+now()});S.records=[rec,...S.records];save(S.records);S.view="home";render();toast("Run Sheet guardado");setTimeout(()=>{S.detail=rec;printSheet(rec)},300)}
+function saveRec(){if(!canNext())return;const rec=Object.assign({},S.form,{id:Date.now().toString(),createdBy:S.user.name,createdAt:new Date().toISOString(),fechaImpresion:today()+" "+now()});S.records=[rec,...S.records];save(S.records);S.view="home";render();toast("Run Sheet guardado");S.detail=rec;renderModal()}
 
 function recCard(r){return `<button class="rec" onclick="openDetail('${r.id}')"><div>
   <div><span class="o">${esc(r.producto)}</span> <span class="pill">W.O. ${esc(r.wo)}</span></div>

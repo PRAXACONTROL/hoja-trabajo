@@ -4,15 +4,15 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Hoja de Trabajo">
 <meta name="theme-color" content="#15314F">
-<title>Hoja de Trabajo · RIVULIS</title>
+<title>Registro de Rollos Film Line · RIVULIS</title>
 <link id="touch-icon" rel="apple-touch-icon" href="">
 <link id="manifest-link" rel="manifest" href="">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <style>
-  :root{--navy:#15314F;--blue:#3880C8;--ink:#0f172a;--sub:#475569;--mut:#94a3b8;--line:#e2e8f0;--bg:#eef2f6;--soft:#eff6ff;--green:#059669;--red:#ef4444}
+  :root{--navy:#15314F;--blue:#3880C8;--ink:#0f172a;--sub:#475569;--mut:#94a3b8;--line:#e2e8f0;--bg:#eef2f6;--green:#059669;--red:#ef4444;--amber:#b45309}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink)}
-  button,input,select{font-family:inherit}button{cursor:pointer;border:none;background:none}input,select{outline:none}
+  button,input,select,textarea{font-family:inherit}button{cursor:pointer;border:none;background:none}input,select,textarea{outline:none}
   .wrap{max-width:760px;margin:0 auto;padding:0 16px 90px}
   .top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:30;box-shadow:0 1px 4px rgba(0,0,0,.2);padding-top:env(safe-area-inset-top)}
   .top-in{max-width:760px;margin:0 auto;padding:11px 16px;display:flex;align-items:center;justify-content:space-between}
@@ -21,64 +21,79 @@
   .brand b{font-size:14px;line-height:1.1}.brand small{font-size:11px;color:#9db8d6;display:block}
   .row{display:flex;align-items:center;gap:6px}
   .btn{padding:9px 13px;border-radius:10px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
-  .btn-blue{background:var(--blue);color:#fff}.btn-ghost{color:#fff}.btn-ghost:active{background:#23476e}
-  .btn-dark{background:var(--navy);color:#fff}.btn-dark:disabled{opacity:.3}
-  .btn-green{background:var(--green);color:#fff}
+  .btn-blue{background:var(--blue);color:#fff}.btn-ghost{color:#fff}.btn-dark{background:var(--navy);color:#fff}.btn-dark:disabled{opacity:.3}.btn-green{background:var(--green);color:#fff}.btn-green:disabled{opacity:.4}
   .login{min-height:100vh;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px}
-  .lc{width:100%;max-width:360px}
-  .lh{text-align:center;margin-bottom:24px}
+  .lc{width:100%;max-width:360px}.lh{text-align:center;margin-bottom:24px}
   .lh .lg{background:var(--blue);width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:800;font-size:20px;color:#fff}
-  .lh h1{color:#fff;font-size:21px}.lh p{color:#9db8d6;font-size:13px;margin-top:3px}
+  .lh h1{color:#fff;font-size:20px}.lh p{color:#9db8d6;font-size:13px;margin-top:3px}
   .lh .badge{display:inline-block;margin-top:8px;font-size:11px;font-weight:800;background:rgba(56,128,200,.25);color:#9db8d6;padding:3px 9px;border-radius:99px}
   .card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-  .inp{width:100%;border:2px solid var(--line);border-radius:11px;padding:12px 13px;font-size:16px;transition:.15s}.inp:focus{border-color:var(--blue)}
-  .ipos{position:relative}.ipos .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--mut);font-size:15px}
-  .inp.pad{padding-left:38px}
-  .stack>*+*{margin-top:11px}
-  .full{width:100%;justify-content:center;padding:13px}
+  .inp{width:100%;border:2px solid var(--line);border-radius:11px;padding:12px 13px;font-size:16px}.inp:focus{border-color:var(--blue)}
+  textarea.inp{resize:vertical}
+  .ipos{position:relative}.ipos .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--mut)}
+  .inp.pad{padding-left:38px}.stack>*+*{margin-top:11px}.full{width:100%;justify-content:center;padding:13px}
   .err{color:var(--red);font-size:14px}
-  .accts{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}
-  .accts p{font-size:12px;color:var(--mut);text-align:center;margin-bottom:8px}
+  .accts{margin-top:18px;padding-top:15px;border-top:1px solid var(--line)}.accts p{font-size:12px;color:var(--mut);text-align:center;margin-bottom:8px}
   .ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .acct{border:1px solid var(--line);border-radius:11px;padding:10px;text-align:left}.acct b{font-size:14px;color:var(--navy)}.acct small{font-size:11px;color:var(--mut);display:block}
-  .center{text-align:center}.pt40{padding-top:38px}
-  .hero{width:74px;height:74px;border-radius:18px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-weight:800;font-size:24px}
-  h1.t{font-size:22px;color:var(--navy)}.muted{color:var(--sub);margin-top:6px}
-  .big{background:var(--navy);color:#fff;padding:16px 28px;border-radius:16px;font-weight:700;font-size:17px;display:inline-flex;gap:8px;align-items:center;margin-top:24px}
-  .pt24{padding-top:20px}
-  .prog{display:flex;gap:5px;margin-bottom:6px}
-  .pg{flex:1;height:6px;border-radius:3px;background:var(--line)}.pg.on{background:var(--blue)}.pg.done{background:var(--green)}
-  .stepn{font-size:12px;color:var(--mut);margin-bottom:14px}
-  .panel{background:#fff;border-radius:16px;border:1px solid var(--line);padding:20px;min-height:300px}
-  .stitle{font-size:19px;font-weight:800;color:var(--navy);margin-bottom:3px}
-  .shint{color:var(--sub);font-size:13px;margin-bottom:16px}
+  .center{text-align:center}.pt30{padding-top:28px}
+  .hero{width:70px;height:70px;border-radius:18px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-weight:800;font-size:22px}
+  h1.t{font-size:21px;color:var(--navy)}.muted{color:var(--sub);margin-top:6px;font-size:14px}
+  .big{background:var(--navy);color:#fff;padding:15px 26px;border-radius:15px;font-weight:700;font-size:16px;display:inline-flex;gap:8px;align-items:center;margin-top:22px}
+  .pt20{padding-top:18px}
   .lbl{display:block;font-size:13px;font-weight:600;color:var(--sub);margin-bottom:5px}
-  .field+.field{margin-top:13px}
-  .g2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .field+.field{margin-top:12px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .panel{background:#fff;border-radius:16px;border:1px solid var(--line);padding:18px}
   .scanbtn{margin-top:7px;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--navy);color:#fff;padding:11px;border-radius:11px;font-weight:600;font-size:14px}
+  .hdr{background:var(--navy);color:#fff;border-radius:14px;padding:14px 16px;margin-bottom:12px}
+  .hdr .wo{font-size:18px;font-weight:800}.hdr .sub{font-size:12px;color:#9db8d6;margin-top:3px}
+  .stats{display:flex;gap:18px;margin-top:10px}.stats div b{font-size:18px}.stats div span{font-size:11px;color:#9db8d6;display:block}
+  .scrapline{margin-top:9px;font-size:12px;color:#9db8d6}.scrapline b{color:#fff}
+  .corr{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+  .corr h3{font-size:15px;color:var(--navy);margin-bottom:3px}.corr .pre{font-size:12px;color:var(--mut);margin-bottom:12px}
+  .seclbl{font-size:11px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.4px;margin:14px 0 8px}
+  .wu{border:1px solid var(--line);border-radius:11px;padding:10px;margin-bottom:8px}
+  .wu .tag{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:7px}.wu .tag small{color:var(--mut);font-weight:500}
+  .wu .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .wu input{width:100%;border:2px solid var(--line);border-radius:9px;padding:10px;font-size:16px}.wu input:focus{border-color:var(--blue)}
+  .secdiv{border-top:1px dashed var(--line);margin:14px 0 12px;padding-top:12px}
   .shifts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .shift{padding:12px;border-radius:11px;font-weight:800;font-size:17px;border:2px solid var(--line);background:#fff;color:var(--sub)}.shift.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .shift{padding:11px;border-radius:10px;font-weight:800;font-size:16px;border:2px solid var(--line);background:#fff;color:var(--sub)}.shift.on{background:var(--navy);color:#fff;border-color:var(--navy)}
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .seg button{padding:11px;border-radius:11px;font-weight:700;border:2px solid var(--line);background:#fff;color:var(--sub)}.seg button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-  .conv{font-size:12px;color:var(--blue);margin-top:6px;font-weight:600}
-  .nav{display:flex;justify-content:space-between;margin-top:18px}
+  .seg button{padding:11px;border-radius:10px;font-weight:700;border:2px solid var(--line);background:#fff;color:var(--sub)}.seg button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .conv{font-size:12px;color:var(--blue);margin-top:6px;font-weight:600;min-height:14px}
+  .qabanner{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--amber);color:#fff;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:12.5px}
+  .qabanner b{font-size:14px;display:block;margin-bottom:2px}
+  .corrrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-top:8px}
+  .corrrow .ttl{font-weight:800;color:var(--navy);font-size:14px}
+  .corrrow .meta{font-size:11.5px;color:var(--sub);margin-top:4px;line-height:1.45}
+  .qbtn{background:#fef3c7;color:#92400e;border-radius:9px;padding:9px 11px;font-weight:700;font-size:12px;white-space:nowrap}
+  .qbtn.due{background:#fee2e2;color:#b91c1c}
+  .qok{display:inline-block;background:#dcfce7;color:#166534;border-radius:9px;padding:7px 10px;font-weight:700;font-size:12px;white-space:nowrap}
+  .qitem{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f1f5f9}
+  .qitem .ql{font-size:14px;font-weight:600;color:var(--ink)}
+  .qyn{display:flex;gap:6px}
+  .qyn button{padding:8px 15px;border-radius:9px;border:2px solid var(--line);font-weight:700;background:#fff;color:var(--sub)}
+  .qyn button.on.yes{background:var(--green);color:#fff;border-color:var(--green)}
+  .qyn button.on.no{background:var(--red);color:#fff;border-color:var(--red)}
+  .rolllist{margin-top:6px}
+  .rollrow{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-top:6px;font-size:13px}
+  .rollrow .n{font-weight:800;color:var(--navy)}.rollrow .w{color:var(--mut);font-size:12px}.rollrow .p{font-weight:700}
   .rec{width:100%;background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;text-align:left;display:flex;justify-content:space-between;gap:12px;margin-top:9px}
-  .rec:active{border-color:var(--blue)}
-  .rec .o{font-weight:800;color:var(--navy)}
-  .pill{font-size:11px;background:#f1f5f9;color:var(--sub);padding:2px 8px;border-radius:99px}
-  .meta{font-size:12.5px;color:var(--sub);margin-top:5px}
-  .empty{text-align:center;color:var(--mut);padding:50px 0}
+  .rec .o{font-weight:800;color:var(--navy)}.pill{font-size:11px;background:#f1f5f9;color:var(--sub);padding:2px 8px;border-radius:99px}
+  .meta{font-size:12.5px;color:var(--sub);margin-top:5px}.empty{text-align:center;color:var(--mut);padding:46px 0}
   .search{position:relative;margin:12px 0}.search .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--mut)}
   .search input{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 11px 11px 36px;font-size:16px}
-  .sectit{display:flex;justify-content:space-between;align-items:center;margin:18px 0 2px}.sectit h2{font-size:18px;color:var(--navy)}
   .ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:flex;align-items:flex-end;justify-content:center}
   @media(min-width:560px){.ov{align-items:center;padding:16px}}
   .modal{background:#fff;width:100%;max-width:560px;border-radius:18px 18px 0 0;max-height:92vh;overflow:auto}
   @media(min-width:560px){.modal{border-radius:18px}}
   .mhead{position:sticky;top:0;background:var(--navy);color:#fff;padding:15px 18px;display:flex;justify-content:space-between;align-items:center}
-  .mhead b{font-size:17px}.mhead small{color:#9db8d6;font-size:12px}
-  .mbody{padding:16px 18px}
+  .mhead b{font-size:17px}.mhead small{color:#9db8d6;font-size:12px}.mbody{padding:16px 18px}
   .drow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13.5px}.drow .k{color:var(--sub)}.drow .v{font-weight:600;text-align:right}
+  .ctabwrap{overflow-x:auto;margin-top:10px}
+  .ctab{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
+  .ctab th,.ctab td{border:1px solid var(--line);padding:6px;text-align:center}.ctab th{background:#f1f5f9;color:var(--navy);font-size:11px}
   .toast{position:fixed;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:60;background:var(--green);color:#fff;padding:12px 18px;border-radius:11px;font-weight:600;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
   .scan-ov{position:fixed;inset:0;background:#000;z-index:80;display:flex;flex-direction:column}
   .scan-top{padding:calc(14px + env(safe-area-inset-top)) 18px 14px;background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center}.scan-top b{font-size:16px}
@@ -87,240 +102,366 @@
   .scan-bottom{padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom));background:var(--navy);color:#cbd5e1;text-align:center;font-size:14px}
   .scan-bottom .mbtn{margin-top:12px;width:100%;background:#fff;color:var(--navy);padding:13px;border-radius:12px;font-weight:700}
   #printarea{display:none}
-  @media print{body{background:#fff}#app{display:none!important}.toast{display:none!important}#printarea{display:block}@page{margin:1.2cm}}
-  .rsheet{font-family:Arial,sans-serif;color:#000;max-width:740px;margin:0 auto}
-  .rstop{text-align:center;font-size:16px;font-weight:800;letter-spacing:1px;border:2px solid #000;padding:7px}
-  .rsprint{display:flex;justify-content:space-between;font-size:11px;padding:4px 2px 8px}
-  .rsheet table{width:100%;border-collapse:collapse}
-  .rsheet td{border:1.3px solid #000;padding:6px 8px;font-size:12.5px}
-  .rsheet .l{font-weight:700;width:46%;background:#f3f4f6}
-  .rsheet .sect{background:#15314F;color:#fff;font-weight:700;text-align:center;font-size:12px}
-  .rsheet .sub{font-weight:700;background:#fafafa;text-align:center}
-  .rsheet .mono{font-family:Consolas,monospace;font-weight:700}
-  .rsheet .rl{font-weight:800;text-align:center;background:#f3f4f6;width:30px}
-  .rsfoot{text-align:center;font-size:10.5px;color:#475569;margin-top:10px}
+  @media print{body{background:#fff}#app{display:none!important}.toast{display:none!important}#printarea{display:block}@page{margin:.8cm;size:portrait}}
+  .rs{font-family:Arial,sans-serif;color:#000;max-width:760px;margin:0 auto}
+  .rs .tt{text-align:center;font-weight:800;font-size:15px;line-height:1.2;margin-bottom:8px}
+  .rscols{display:flex;gap:8px}
+  .rscols table{width:50%;border-collapse:collapse}
+  .rs td,.rs th{border:1px solid #000;padding:1px 2px;font-size:8px;text-align:center;height:15px}
+  .rs th{background:#eee;font-weight:700;font-size:7.5px}
+  .rs .rn{font-weight:700;background:#f7f7f7}
+  .rs .note{font-size:8.5px;font-weight:700;text-align:center;margin:6px 0}
+  .rs .csum{margin-top:8px}
+  .rs .csum .h{font-weight:800;font-size:9px;text-align:center;margin-bottom:3px}
+  .rs .csum table{width:100%;border-collapse:collapse}
+  .rs .csum td,.rs .csum th{font-size:7.5px;height:16px}
+  .rs .series{text-align:center;font-weight:700;font-size:11px;margin:6px 0 4px}
+  .rs .lote{display:flex;align-items:flex-end;gap:6px;font-size:9px;margin-top:6px;flex-wrap:wrap}
+  .rs .lb{border:1px solid #000;padding:3px 6px;min-width:60px;text-align:center;font-weight:700}
+  .rs .lbx{text-align:center}.rs .lbx small{display:block;font-size:8px;margin-top:2px}
+  .rs .times{font-size:9.5px;margin-top:8px}
+  .rs .foot{display:flex;justify-content:space-between;font-size:8px;color:#333;margin-top:8px;border-top:1px solid #999;padding-top:4px}
 </style>
 
 <div id="app"></div>
 <div id="printarea"></div>
 
 <script>
-const KEY="hoja-runsheets-v2";
+const KEY="filmline-orders-v1";
 const SHIFTS=["T1","T2","T3"];
-const ACCOUNTS=[
-  {user:"operador",pass:"1234",name:"Operador Demo",role:"operador"},
-  {user:"gerente",pass:"1234",name:"Gerente Demo",role:"gerente"},
-];
+const ACCOUNTS=[{user:"operador",pass:"1234",name:"Operador Demo",role:"operador"},{user:"gerente",pass:"1234",name:"Gerente Demo",role:"gerente"}];
+const MAXROLLS=70;
+const QA_MS=90*60*1000; // 1.5 h
 const mem={v:null};
-function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return mem.v||[]}}
-function save(v){mem.v=v;try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
 
-function newForm(){return{producto:"",wo:"",filmLine:"",corrida:"",reel:"",calibre:"",blend:"HDPE",wu1:"",wu2:"",wu3:"",wu4:"",fechaInicio:"",turnoInicio:"",horaInicio:"",operadorInicio:"",fechaTermino:"",turnoTermino:"",horaTermino:"",operadorTermino:"",inspeccionadoPor:"",footage:"",scrapPeso:"",scrapUnidad:"lbs"}}
-const S={user:null,records:load(),view:"home",step:1,form:newForm(),query:"",detail:null};
-
+function p2(n){return String(n).padStart(2,"0")}
+function p3(n){return String(n).padStart(3,"0")}
 function today(){const d=new Date();return p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear()}
 function now(){const d=new Date();return p2(d.getHours())+":"+p2(d.getMinutes())}
-function p2(n){return String(n).padStart(2,"0")}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function wuOf(n){return ((n-1)%4)+1}
 function conv(v,u){v=Number(v)||0;return u==="lbs"?`${v} lbs (${(v*0.453592).toFixed(1)} kg)`:`${v} kg (${(v/0.453592).toFixed(1)} lbs)`}
+function parseTs(f,h){if(!f)return null;const m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(String(f).trim());if(!m)return null;const t=/^(\d{1,2}):(\d{2})$/.exec(String(h||"00:00").trim());const hh=t?+t[1]:0,mm=t?+t[2]:0;return new Date(+m[3],+m[2]-1,+m[1],hh,mm).getTime()}
+function allRolls(o){return (o.corridas||[]).flatMap(c=>c.rolls)}
+function orderScrapLbs(o){return (o.corridas||[]).reduce((s,c)=>s+(c.scrapUnidad==="kg"?(Number(c.scrapPeso)||0)/0.453592:(Number(c.scrapPeso)||0)),0)}
+function qaPending(c){return !!c.arranqueTs && (!c.qa||!c.qa.done)}
+function qaDue(c){return qaPending(c) && Date.now()>=c.arranqueTs+QA_MS}
+function qaRemainingMs(c){return c.arranqueTs?(c.arranqueTs+QA_MS-Date.now()):null}
+function fmtRemain(c){const ms=qaRemainingMs(c);if(ms==null)return"";if(ms<=0)return"vencido";const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000);return "en "+(h?h+"h ":"")+m+"m"}
 
-const ICO={user:'◑',lock:'▦',cam:'◎'};
-const $=s=>document.querySelector(s);
-const app=()=>$("#app");
+function normalizeOrder(o){
+  if(!o.corridas){
+    o.corridas=[];
+    if(Array.isArray(o.rolls)&&o.rolls.length){
+      for(let i=0;i<o.rolls.length;i+=4){const g=o.rolls.slice(i,i+4);
+        o.corridas.push({num:o.corridas.length+1,turno:o.turnoInicio||"",operador:o.createdBy||"",scrapPeso:"",scrapUnidad:"lbs",fecha:(g[0]&&g[0].fecha)||o.inicioFecha||"",hora:(g[0]&&g[0].hora)||"",rolls:g.map(r=>({rollo:r.rollo,wu:r.wu,peso:r.peso||"",grosor:r.grosor||"",fecha:r.fecha||"",hora:r.hora||""}))})}
+    }
+  }
+  (o.corridas||[]).forEach(c=>{
+    if(c.operadorNombre===undefined)c.operadorNombre=c.operador||"";
+    if(c.operadorNum===undefined)c.operadorNum="";
+    if(c.sku===undefined)c.sku="";
+    if(c.maquina===undefined)c.maquina="";
+    if(c.inicioFecha===undefined)c.inicioFecha=c.fecha||"";
+    if(c.inicioHora===undefined)c.inicioHora=c.hora||"";
+    if(c.arranqueFecha===undefined)c.arranqueFecha=c.fecha||"";
+    if(c.arranqueHora===undefined)c.arranqueHora=c.hora||"";
+    if(c.arranqueTs===undefined)c.arranqueTs=parseTs(c.arranqueFecha,c.arranqueHora);
+    if(c.scrapUnidad===undefined)c.scrapUnidad="lbs";
+    if(c.scrapPeso===undefined)c.scrapPeso="";
+    if(c.qa===undefined)c.qa=null;
+    (c.rolls||[]).forEach(r=>{if(r.grosor===undefined)r.grosor=""});
+  });
+  return o;
+}
+function load(){try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");return a.map(normalizeOrder)}catch(e){return mem.v||[]}}
+function save(v){mem.v=v;try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}
+function newCform(){return{turno:"",sku:"",operadorNombre:"",operadorNum:"",maquina:"",inicioFecha:today(),inicioHora:now(),arranqueFecha:today(),arranqueHora:now(),pesos:["","","",""],grosores:["","","",""],scrapPeso:"",scrapUnidad:"lbs"}}
+
+const S={user:null,orders:load(),view:"home",form:null,cur:null,detail:null,query:"",cform:newCform(),qaTarget:null,qaForm:null,qaAlerted:new Set()};
+const $=s=>document.querySelector(s);const app=()=>$("#app");
 function render(){if(!S.user){renderLogin();return}if(S.user.role==="operador")renderOperator();else renderManager()}
+function scopeOrders(){return S.user.role==="operador"?S.orders.filter(o=>o.createdBy===S.user.name):S.orders}
 
+/* LOGIN */
 function renderLogin(){
   app().innerHTML=`<div class="login"><div class="lc">
-    <div class="lh"><div class="lg">PX</div><h1>Hoja de Trabajo</h1><p>PRAXA Control · RIVULIS</p><span class="badge">DEMO</span></div>
+    <div class="lh"><div class="lg">PX</div><h1>Registro de Rollos</h1><p>Film Line · PRAXA Control · RIVULIS</p><span class="badge">DEMO</span></div>
     <div class="card"><div class="stack">
-      <div class="ipos"><span class="ic">${ICO.user}</span><input id="u" class="inp pad" placeholder="Usuario"></div>
-      <div class="ipos"><span class="ic">${ICO.lock}</span><input id="p" type="password" class="inp pad" placeholder="Contraseña"></div>
-      <div id="le"></div>
-      <button class="btn btn-dark full" onclick="doLogin()">Entrar</button>
-    </div>
-    <div class="accts"><p>Cuentas demo (toca para usar)</p><div class="ag">
+      <div class="ipos"><span class="ic">◑</span><input id="u" class="inp pad" placeholder="Usuario"></div>
+      <div class="ipos"><span class="ic">▦</span><input id="p" type="password" class="inp pad" placeholder="Contraseña"></div>
+      <div id="le"></div><button class="btn btn-dark full" onclick="doLogin()">Entrar</button>
+    </div><div class="accts"><p>Cuentas demo (toca para usar)</p><div class="ag">
       <button class="acct" onclick="quick(0)"><b>Operador</b><small>operador / 1234</small></button>
       <button class="acct" onclick="quick(1)"><b>Gerente</b><small>gerente / 1234</small></button>
-    </div></div></div>
-  </div></div>`;
+    </div></div></div></div></div>`;
   $("#p").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
 }
 function quick(i){$("#u").value=ACCOUNTS[i].user;$("#p").value=ACCOUNTS[i].pass;$("#le").innerHTML=""}
 function doLogin(){const u=$("#u").value.trim().toLowerCase(),p=$("#p").value.trim();const a=ACCOUNTS.find(x=>x.user===u&&x.pass===p);if(a){S.user=a;S.view="home";render()}else $("#le").innerHTML='<div class="err">Usuario o contraseña incorrectos</div>'}
 function logout(){S.user=null;render()}
+function topbar(right){return `<div class="top"><div class="top-in"><div class="brand"><div class="logo">PX</div><div><b>Registro de Rollos</b><small>${esc(S.user.name)} · ${S.user.role==="operador"?"Operador":"Gerente"}</small></div></div><div class="row">${right||""}<button class="btn btn-ghost" onclick="logout()">Salir</button></div></div></div>`}
 
-function topbar(right){return `<div class="top"><div class="top-in">
-  <div class="brand"><div class="logo">PX</div><div><b>Hoja de Trabajo</b><small>${esc(S.user.name)} · ${S.user.role==="operador"?"Operador":"Gerente"}</small></div></div>
-  <div class="row">${right||""}<button class="btn btn-ghost" onclick="logout()">Salir</button></div>
-</div></div>`}
+/* QA BANNER */
+function qaBannerHTML(orders){
+  const due=[];orders.forEach(o=>(o.corridas||[]).forEach(c=>{if(qaDue(c))due.push({o,c})}));
+  if(!due.length)return "";
+  const f=due[0];
+  return `<div class="qabanner"><div><b>⚠ Checklist de QA pendiente</b>W.O. ${esc(f.o.wo)} · Corrida ${f.c.num}${due.length>1?` · +${due.length-1} más`:''}</div><button class="btn" style="background:#fff;color:var(--amber)" onclick="openQA('${f.o.id}',${f.c.num})">Realizar QA</button></div>`;
+}
 
+/* OPERATOR */
 function renderOperator(){
-  const right=`<button class="btn btn-blue" onclick="startW()">+ Nuevo</button>`;
-  if(S.view==="wizard"){app().innerHTML=topbar(right)+`<div class="wrap">${wizardHTML()}</div>`;afterWizard();return}
-  const mine=S.records.filter(r=>r.createdBy===S.user.name).slice(0,6);
-  app().innerHTML=topbar(right)+`<div class="wrap"><div class="center pt40">
-    <div class="hero">PX</div><h1 class="t">Nueva hoja de corrida</h1>
-    <p class="muted">Captura los datos del Film Line; al guardar se genera el Run Sheet en PDF.</p>
-    <button class="big" onclick="startW()">+ Nueva hoja de trabajo</button>
-    ${mine.length?`<div style="text-align:left;margin-top:30px"><div class="stepn" style="font-weight:700">Mis últimas hojas</div>${mine.map(recCard).join("")}</div>`:""}
-  </div></div>`;
-}
-function startW(){S.form=newForm();S.step=1;S.view="wizard";render()}
-
-const STEPS=6;
-function f(k){return esc(S.form[k])}
-function wizardHTML(){
-  let bars="";for(let i=1;i<=STEPS;i++)bars+=`<div class="pg ${S.step>i?'done':S.step===i?'on':''}"></div>`;
-  return `<div class="pt24"><div class="prog">${bars}</div><div class="stepn">Paso ${S.step} de ${STEPS}</div>
-  <div class="panel">${stepBody()}</div>
-  <div class="nav">
-    ${S.step===1?`<button class="btn" style="color:var(--sub)" onclick="cancelW()">Cancelar</button>`:`<button class="btn" style="color:var(--navy)" onclick="goStep(${S.step-1})">← Atrás</button>`}
-    ${S.step<STEPS?`<button id="nx" class="btn btn-dark" onclick="goStep(${S.step+1})">Siguiente →</button>`:`<button id="nx" class="btn btn-green" onclick="saveRec()">✓ Guardar y generar</button>`}
-  </div></div>`;
-}
-function cancelW(){S.view="home";render()}
-function goStep(n){if(n>S.step&&!canNext())return;if(n<1)return;S.step=n;render()}
-
-function tF(label,k,ph,type){return `<div class="field"><label class="lbl">${label}</label><input class="inp" data-k="${k}" value="${f(k)}" placeholder="${ph||''}" ${type?`type="${type}"`:''}></div>`}
-function scanF(label,k,ph){return `<div class="field"><label class="lbl">${label}</label><input class="inp" data-k="${k}" value="${f(k)}" placeholder="${ph||''}"><button class="scanbtn" onclick="openScanner('${k}','${label.replace(/'/g,'')}')">${ICO.cam} Escanear con cámara</button></div>`}
-function shiftsF(label,k){return `<div class="field"><label class="lbl">${label}</label><div class="shifts">${SHIFTS.map(s=>`<button class="shift ${S.form[k]===s?'on':''}" onclick="setF('${k}','${s}')">${s}</button>`).join("")}</div></div>`}
-
-function stepBody(){
-  const F=S.form;
-  switch(S.step){
-    case 1:return `<div class="stitle">Producto y orden</div><div class="shint">Identificación de la corrida.</div>
-      ${tF("Producto","producto","Ej. 508/243")}
-      ${scanF("Work Order (W.O.#)","wo","Escanea o escribe")}
-      ${tF("Film Line #","filmLine","Ej. 8")}`;
-    case 2:return `<div class="stitle">Rollo</div><div class="shint">Corrida, reel, calibre y blend.</div>
-      <div class="g2">${tF("Corrida (Run)","corrida","Ej. 279")}${tF("Rollo (Reel)","reel","Ej. 36")}</div>
-      <div class="g2" style="margin-top:13px">${tF("Calibre","calibre","")}${tF("Blend","blend","HDPE")}</div>`;
-    case 3:return `<div class="stitle">Números de rastreo (W/U)</div><div class="shint">4 rollos por corrida (W/U #1–4). Se generan con el número de corrida.</div>
-      ${tF("W/U #1","wu1","")}${tF("W/U #2","wu2","")}${tF("W/U #3","wu3","")}${tF("W/U #4","wu4","")}`;
-    case 4:return `<div class="stitle">Inicio</div><div class="shint">Operador, fecha, turno y hora de arranque.</div>
-      ${scanF("Operador (inicio)","operadorInicio","Escanea gafete")}
-      ${tF("Fecha de inicio","fechaInicio","")}
-      ${shiftsF("Turno de inicio","turnoInicio")}
-      ${tF("Hora de inicio","horaInicio","","time")}`;
-    case 5:return `<div class="stitle">Cierre</div><div class="shint">Término e inspección.</div>
-      ${tF("Fecha de término","fechaTermino","")}
-      ${shiftsF("Turno que terminó","turnoTermino")}
-      ${tF("Hora de término","horaTermino","","time")}
-      ${tF("Operador (término)","operadorTermino","")}
-      ${tF("Inspeccionado por","inspeccionadoPor","Ej. ALFREDO")}`;
-    case 6:{const c=conv(F.scrapPeso,F.scrapUnidad);return `<div class="stitle">Producción y scrap</div><div class="shint">Footage y scrap por peso.</div>
-      ${tF("Footage (pies)","footage","Ej. 21930")}
-      <div class="field"><label class="lbl">Unidad de scrap</label><div class="seg">
-        <button class="${F.scrapUnidad==='lbs'?'on':''}" onclick="setF('scrapUnidad','lbs')">Libras (lbs)</button>
-        <button class="${F.scrapUnidad==='kg'?'on':''}" onclick="setF('scrapUnidad','kg')">Kilos (kg)</button></div></div>
-      <div class="field"><label class="lbl">Scrap (peso)</label><input class="inp" data-k="scrapPeso" type="number" step="0.1" inputmode="decimal" value="${f('scrapPeso')}" placeholder="0">
-        <div class="conv" id="convv">${Number(F.scrapPeso)?c:''}</div></div>`;}
-  }
-}
-function setF(k,v){S.form[k]=v;render()}
-function afterWizard(){
-  if(S.step===4&&!S.form.fechaInicio){S.form.fechaInicio=today();S.form.horaInicio=now();const a=document.querySelector('[data-k=fechaInicio]'),b=document.querySelector('[data-k=horaInicio]');if(a)a.value=today();if(b)b.value=S.form.horaInicio}
-  if(S.step===5&&!S.form.fechaTermino){S.form.fechaTermino=today();S.form.horaTermino=now();const a=document.querySelector('[data-k=fechaTermino]'),b=document.querySelector('[data-k=horaTermino]');if(a)a.value=today();if(b)b.value=S.form.horaTermino}
-  if(S.step===3){const F=S.form;if(F.corrida){[1,2,3,4].forEach(n=>{const k="wu"+n;if(!F[k]){F[k]=`${F.corrida}-${n}`;const el=document.querySelector(`[data-k=${k}]`);if(el)el.value=F[k]}})}}
-  document.querySelectorAll("[data-k]").forEach(el=>el.addEventListener("input",e=>{S.form[el.dataset.k]=e.target.value;const c=document.getElementById("convv");if(c&&el.dataset.k==="scrapPeso")c.textContent=Number(S.form.scrapPeso)?conv(S.form.scrapPeso,S.form.scrapUnidad):"";updateNext()}));
-  updateNext();
-}
-function canNext(){const F=S.form;switch(S.step){
-  case 1:return F.producto.trim()&&F.wo.trim()&&F.filmLine.trim();
-  case 2:return F.corrida.trim()&&F.reel.trim();
-  case 3:return true;
-  case 4:return F.operadorInicio.trim()&&F.fechaInicio&&F.turnoInicio&&F.horaInicio;
-  case 5:return F.fechaTermino&&F.turnoTermino&&F.horaTermino;
-  case 6:return F.scrapPeso!=="";
-  default:return true}}
-function updateNext(){const b=document.getElementById("nx");if(b)b.disabled=!canNext()}
-
-function saveRec(){if(!canNext())return;const rec=Object.assign({},S.form,{id:Date.now().toString(),createdBy:S.user.name,createdAt:new Date().toISOString(),fechaImpresion:today()+" "+now()});S.records=[rec,...S.records];save(S.records);S.view="home";render();toast("Run Sheet guardado");S.detail=rec;renderModal()}
-
-function recCard(r){return `<button class="rec" onclick="openDetail('${r.id}')"><div>
-  <div><span class="o">${esc(r.producto)}</span> <span class="pill">W.O. ${esc(r.wo)}</span></div>
-  <div class="meta">FL ${esc(r.filmLine)} · Run ${esc(r.corrida)} · Reel ${esc(r.reel)} · ${esc(r.fechaInicio)} ${esc(r.turnoInicio)}</div>
-</div><div style="text-align:right"><div style="color:var(--red);font-weight:700">${esc(r.scrapPeso)} ${esc(r.scrapUnidad)}</div><div class="pill" style="margin-top:4px">PDF</div></div></button>`}
-
-function renderManager(){
-  const q=S.query.toLowerCase();
-  const fl=S.records.filter(r=>!q||[r.producto,r.wo,r.filmLine,r.corrida,r.reel,r.operadorInicio,r.createdBy].some(x=>(x||"").toLowerCase().includes(q)));
-  const tScrap=S.records.reduce((s,r)=>s+(r.scrapUnidad==="kg"?(Number(r.scrapPeso)||0)/0.453592:(Number(r.scrapPeso)||0)),0);
-  app().innerHTML=topbar("")+`<div class="wrap">
-    <div class="pt24"><h1 class="t">Panel del gerente</h1><p class="muted" style="font-size:13px">Hojas de corrida capturadas por los operadores.</p></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px">
-      <div class="panel" style="min-height:auto;padding:14px"><div style="font-size:24px;font-weight:800;color:var(--navy)">${S.records.length}</div><div style="font-size:12px;color:var(--mut)">Run Sheets</div></div>
-      <div class="panel" style="min-height:auto;padding:14px"><div style="font-size:24px;font-weight:800;color:var(--red)">${tScrap.toFixed(0)} lbs</div><div style="font-size:12px;color:var(--mut)">Scrap total</div></div>
-    </div>
-    <div class="search"><span class="ic">⌕</span><input id="q" value="${esc(S.query)}" placeholder="Buscar producto, W.O., run, operador…"></div>
-    <div id="rl">${fl.length?fl.map(recCard).join(""):'<div class="empty">Sin registros aún.</div>'}</div>
+  if(S.view==="neworder"){renderNewOrder();return}
+  if(S.view==="order"){renderOrderScreen();return}
+  const right=`<button class="btn btn-blue" onclick="newOrder()">+ Orden</button>`;
+  const mine=S.orders.filter(o=>o.createdBy===S.user.name);
+  app().innerHTML=topbar(right)+`<div class="wrap">${qaBannerHTML(mine)}<div class="center pt30">
+    <div class="hero">PX</div><h1 class="t">Órdenes de trabajo</h1>
+    <p class="muted">Cada orden lleva 70 rollos. En cada corrida capturas turno, SKU, operador, máquina, arranque de línea y el peso/grosor de los 4 rollos.</p>
+    <button class="big" onclick="newOrder()">+ Nueva orden de trabajo</button></div>
+    ${mine.length?`<div style="margin-top:26px"><div class="lbl">Mis órdenes</div>${mine.map(orderCard).join("")}</div>`:""}
   </div>`;
-  const qi=$("#q");if(qi)qi.addEventListener("input",e=>{S.query=e.target.value;const q2=S.query.toLowerCase();const f2=S.records.filter(r=>!q2||[r.producto,r.wo,r.filmLine,r.corrida,r.reel,r.operadorInicio,r.createdBy].some(x=>(x||"").toLowerCase().includes(q2)));$("#rl").innerHTML=f2.length?f2.map(recCard).join(""):'<div class="empty">Sin resultados</div>'});
 }
+function orderCard(o){const n=allRolls(o).length,tot=allRolls(o).reduce((s,r)=>s+(Number(r.peso)||0),0);
+  return `<button class="rec" onclick="openOrder('${o.id}')"><div>
+    <div><span class="o">W.O. ${esc(o.wo)}</span> <span class="pill">FL ${esc(o.filmLine)}</span> ${o.finFecha?'<span class="pill">Finalizada</span>':''}</div>
+    <div class="meta">Grosor ${esc(o.grosor||'—')} · Mezcla ${esc(o.mezcla||'—')} · ${esc(o.inicioFecha)}</div>
+  </div><div style="text-align:right"><div class="o">${n}/70</div><div class="meta">${tot.toFixed(0)} lbs</div></div></button>`}
 
-function openDetail(id){S.detail=S.records.find(r=>r.id===id);renderModal()}
-function closeDetail(){S.detail=null;const m=$("#ov");if(m)m.remove()}
-function renderModal(){const r=S.detail;if(!r)return;
-  const dr=(k,v)=>`<div class="drow"><span class="k">${k}</span><span class="v">${esc(v)||"—"}</span></div>`;
-  const el=document.createElement("div");el.className="ov";el.id="ov";el.onclick=e=>{if(e.target===el)closeDetail()};
-  el.innerHTML=`<div class="modal"><div class="mhead"><div><b>${esc(r.producto)}</b><div><small>W.O. ${esc(r.wo)} · FL ${esc(r.filmLine)}</small></div></div><button onclick="closeDetail()" style="color:#fff;padding:6px">✕</button></div>
+function newOrder(){S.form={wo:"",filmLine:"",anio:String(new Date().getFullYear()),grosor:"",mezcla:"HDPE",series:"500 / 700",lote:""};S.view="neworder";render()}
+function ff(k){return esc(S.form[k])}
+function renderNewOrder(){
+  app().innerHTML=topbar("")+`<div class="wrap"><div class="pt20">
+    <h1 class="t" style="margin-bottom:4px">Nueva orden de trabajo</h1><p class="muted" style="margin-bottom:14px">Datos de la corrida (encabezado de la hoja).</p>
+    <div class="panel">
+      <div class="field"><label class="lbl">Work Order (W.O.#)</label><input class="inp" data-k="wo" value="${ff('wo')}" placeholder="Ej. 86-130383"><button class="scanbtn" onclick="scanWO()">◎ Escanear con cámara</button></div>
+      <div class="g2"><div class="field"><label class="lbl">Film Line #</label><input class="inp" data-k="filmLine" value="${ff('filmLine')}" placeholder="Ej. 8"></div><div class="field"><label class="lbl">Año</label><input class="inp" data-k="anio" value="${ff('anio')}"></div></div>
+      <div class="g2"><div class="field"><label class="lbl">Grosor nominal</label><input class="inp" data-k="grosor" value="${ff('grosor')}" placeholder="Objetivo"></div><div class="field"><label class="lbl">Mezcla</label><input class="inp" data-k="mezcla" value="${ff('mezcla')}"></div></div>
+      <div class="g2"><div class="field"><label class="lbl">Series</label><input class="inp" data-k="series" value="${ff('series')}"></div><div class="field"><label class="lbl">Lote #</label><input class="inp" data-k="lote" value="${ff('lote')}"></div></div>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:16px">
+      <button class="btn" style="color:var(--sub)" onclick="S.view='home';render()">Cancelar</button>
+      <button id="cr" class="btn btn-dark" onclick="createOrder()">Crear orden →</button>
+    </div></div></div>`;
+  document.querySelectorAll("[data-k]").forEach(el=>el.addEventListener("input",e=>{S.form[el.dataset.k]=e.target.value;updateCr()}));
+  updateCr();
+}
+function updateCr(){const b=$("#cr");if(b)b.disabled=!(S.form.wo.trim()&&S.form.filmLine.trim())}
+function scanWO(){openScanner('Work Order',t=>{S.form.wo=t;const i=$('[data-k=wo]');if(i)i.value=t;updateCr()})}
+function createOrder(){const F=S.form;if(!(F.wo.trim()&&F.filmLine.trim()))return;
+  const o=Object.assign({},F,{id:Date.now().toString(),createdBy:S.user.name,inicioFecha:today(),inicioHora:now(),finFecha:"",finHora:"",corridas:[]});
+  S.orders=[o,...S.orders];save(S.orders);S.cur=o.id;S.cform=newCform();S.view="order";render();toast("Orden creada")}
+
+function openOrder(id){S.cur=id;S.cform=newCform();S.view="order";render()}
+function curOrder(){return S.orders.find(o=>o.id===S.cur)}
+function renderOrderScreen(){
+  const o=curOrder();if(!o){S.view="home";render();return}
+  const rolls=allRolls(o);const n=rolls.length,tot=rolls.reduce((s,r)=>s+(Number(r.peso)||0),0),left=MAXROLLS-n;
+  const start=n+1;const count=Math.min(4,left);
+  const cf=S.cform;
+  let wuInputs="";for(let i=0;i<count;i++){const rollo=start+i;wuInputs+=`<div class="wu"><div class="tag">W/U #${wuOf(rollo)} <small>Rollo ${p3(rollo)}</small></div>
+    <div class="pair">
+      <input type="number" step="0.1" inputmode="decimal" data-cf="peso" data-i="${i}" value="${esc(cf.pesos[i])}" placeholder="Peso (lbs)">
+      <input type="number" step="0.001" inputmode="decimal" data-cf="grosor" data-i="${i}" value="${esc(cf.grosores[i])}" placeholder="Grosor">
+    </div></div>`}
+  const cvt=conv(cf.scrapPeso,cf.scrapUnidad);
+  const canAdd=!!(cf.turno&&((cf.operadorNum||'').trim()||(cf.operadorNombre||'').trim()));
+  const corr=(o.corridas||[]).slice().reverse();
+  app().innerHTML=topbar(`<button class="btn btn-blue" onclick="printRunsheet('${o.id}')">🖨 PDF</button>`)+`<div class="wrap"><div class="pt20">
+    <button class="btn" style="color:var(--sub);padding-left:0" onclick="S.view='home';render()">← Órdenes</button>
+    ${qaBannerHTML([o])}
+    <div class="hdr"><div class="wo">W.O. ${esc(o.wo)}</div><div class="sub">FL ${esc(o.filmLine)} · Año ${esc(o.anio)} · Grosor nom. ${esc(o.grosor||'—')} · Mezcla ${esc(o.mezcla||'—')} · Series ${esc(o.series)} · Lote ${esc(o.lote||'—')}</div>
+      <div class="stats"><div><b>${n}/70</b><span>Rollos</span></div><div><b>${tot.toFixed(0)}</b><span>Peso total (lbs)</span></div><div><b>${(o.corridas||[]).length}</b><span>Corridas</span></div></div>
+      <div class="scrapline">Scrap acumulado: <b>${orderScrapLbs(o).toFixed(1)} lbs</b></div></div>
+    ${left>0?`<div class="corr"><h3>Agregar corrida (${count} rollo${count>1?'s':''})</h3><div class="pre">Rollo #, W/U, fecha y hora se asignan solos. QA se solicita 1.5 h después del arranque.</div>
+      <div class="seclbl">Datos de la corrida</div>
+      <div class="field"><label class="lbl">Turno</label><div class="shifts">${SHIFTS.map(s=>`<button class="shift ${cf.turno===s?'on':''}" onclick="setCF('turno','${s}')">${s}</button>`).join("")}</div></div>
+      <div class="field"><label class="lbl">SKU de parte</label><input class="inp" data-cf="sku" value="${esc(cf.sku)}" placeholder="Ej. 508-243"></div>
+      <div class="g2"><div class="field"><label class="lbl">Operador (nombre)</label><input class="inp" data-cf="operadorNombre" value="${esc(cf.operadorNombre)}" placeholder="Nombre"></div>
+      <div class="field"><label class="lbl">No. empleado</label><input class="inp" data-cf="operadorNum" value="${esc(cf.operadorNum)}" placeholder="Núm."></div></div>
+      <button class="scanbtn" onclick="scanCF('operadorNum','Gafete del operador')">◎ Escanear gafete del operador</button>
+      <div class="field" style="margin-top:12px"><label class="lbl">Máquina</label><input class="inp" data-cf="maquina" value="${esc(cf.maquina)}" placeholder="Ej. FL-8"><button class="scanbtn" onclick="scanCF('maquina','Máquina')">◎ Escanear máquina</button></div>
+      <div class="g2" style="margin-top:12px"><div class="field"><label class="lbl">Inicio de turno (fecha)</label><input class="inp" data-cf="inicioFecha" value="${esc(cf.inicioFecha)}"></div><div class="field"><label class="lbl">Hora</label><input class="inp" type="time" data-cf="inicioHora" value="${esc(cf.inicioHora)}"></div></div>
+      <div class="g2"><div class="field"><label class="lbl">Arranque de línea (fecha)</label><input class="inp" data-cf="arranqueFecha" value="${esc(cf.arranqueFecha)}"></div><div class="field"><label class="lbl">Hora</label><input class="inp" type="time" data-cf="arranqueHora" value="${esc(cf.arranqueHora)}"></div></div>
+      <div class="seclbl">Rollos (peso y grosor)</div>
+      ${wuInputs}
+      <div class="seclbl">Scrap de la corrida</div>
+      <div class="field"><div class="seg">
+        <button class="${cf.scrapUnidad==='lbs'?'on':''}" onclick="setCF('scrapUnidad','lbs')">Libras (lbs)</button>
+        <button class="${cf.scrapUnidad==='kg'?'on':''}" onclick="setCF('scrapUnidad','kg')">Kilos (kg)</button></div></div>
+      <div class="field"><input class="inp" type="number" step="0.1" inputmode="decimal" data-cf="scrap" value="${esc(cf.scrapPeso)}" placeholder="Scrap (peso)">
+        <div class="conv" id="cfconv">${Number(cf.scrapPeso)?cvt:''}</div></div>
+      <button id="addc" class="btn btn-green full" style="margin-top:12px" ${canAdd?'':'disabled'} onclick="addCorrida()">✓ Agregar corrida y registrar pesos</button></div>`
+      :`<div class="corr" style="text-align:center"><h3>Orden completa</h3><div class="pre">Los 70 rollos fueron registrados.</div></div>`}
+    ${corr.length?`<div class="lbl" style="margin-top:6px">Corridas y QA</div>${corr.map(c=>corrChip(c,o)).join("")}`:""}
+    <div class="row" style="gap:10px;margin-top:18px">
+      <button class="btn btn-dark" style="flex:1;justify-content:center" onclick="printRunsheet('${o.id}')">🖨 Generar Run Sheet (PDF)</button>
+      ${!o.finFecha?`<button class="btn btn-green" style="flex:1;justify-content:center" onclick="finalizeOrder('${o.id}')">Finalizar orden</button>`:''}
+    </div></div></div>`;
+  bindCform();
+}
+function corrChip(c,o){
+  const ro=c.rolls.map(r=>r.rollo);const rng=ro.length?`${ro[0]}–${ro[ro.length-1]}`:"";
+  let qa;
+  if(c.qa&&c.qa.done){const ok=c.qa.navajasColocadas&&c.qa.navajasCortando&&c.qa.grosorAdecuado;qa=`<span class="qok" style="${ok?'':'background:#fee2e2;color:#b91c1c'}" onclick="openQA('${o.id}',${c.num})">QA ${ok?'✓':'⚠'} ${esc(c.qa.qaNum||c.qa.qaNombre||'')}</span>`}
+  else if(qaDue(c))qa=`<button class="qbtn due" onclick="openQA('${o.id}',${c.num})">⚠ QA vencido</button>`;
+  else qa=`<button class="qbtn" onclick="openQA('${o.id}',${c.num})">QA ${fmtRemain(c)}</button>`;
+  return `<div class="corrrow"><div><div class="ttl">Corrida ${c.num} <span class="pill">${rng}</span> <span class="pill">${esc(c.turno)||'—'}</span></div>
+    <div class="meta">SKU ${esc(c.sku||'—')} · ${esc(c.operadorNombre||'—')}${c.operadorNum?(' #'+esc(c.operadorNum)):''} · Máq ${esc(c.maquina||'—')}<br>Arranque ${esc(c.arranqueFecha)} ${esc(c.arranqueHora)} · Scrap ${esc(c.scrapPeso)||0} ${esc(c.scrapUnidad)}</div></div>
+    <div>${qa}</div></div>`;
+}
+function setCF(k,v){S.cform[k]=v;render()}
+function scanCF(k,label){openScanner(label,t=>{S.cform[k]=t;render()})}
+function bindCform(){
+  document.querySelectorAll("[data-cf]").forEach(el=>el.addEventListener("input",e=>{
+    const k=el.dataset.cf,val=e.target.value;
+    if(k==="peso")S.cform.pesos[Number(el.dataset.i)]=val;
+    else if(k==="grosor")S.cform.grosores[Number(el.dataset.i)]=val;
+    else if(k==="scrap"){S.cform.scrapPeso=val;const cc=$("#cfconv");if(cc)cc.textContent=Number(S.cform.scrapPeso)?conv(S.cform.scrapPeso,S.cform.scrapUnidad):""}
+    else S.cform[k]=val;
+    updateAddc();
+  }));
+  updateAddc();
+}
+function updateAddc(){const b=$("#addc");if(!b)return;const cf=S.cform;b.disabled=!(cf.turno&&((cf.operadorNum||'').trim()||(cf.operadorNombre||'').trim()))}
+function addCorrida(){const o=curOrder();if(!o)return;const existing=allRolls(o).length;const start=existing+1;const left=MAXROLLS-existing;const count=Math.min(4,left);if(count<=0)return;
+  const cf=S.cform;if(!(cf.turno&&((cf.operadorNum||'').trim()||(cf.operadorNombre||'').trim())))return;
+  const rolls=[];for(let i=0;i<count;i++){const rollo=start+i;rolls.push({rollo:p3(rollo),wu:wuOf(rollo),peso:(cf.pesos[i]||""),grosor:(cf.grosores[i]||""),fecha:today(),hora:now()})}
+  o.corridas.push({num:o.corridas.length+1,turno:cf.turno,sku:cf.sku,operadorNombre:cf.operadorNombre,operadorNum:cf.operadorNum,maquina:cf.maquina,inicioFecha:cf.inicioFecha,inicioHora:cf.inicioHora,arranqueFecha:cf.arranqueFecha,arranqueHora:cf.arranqueHora,arranqueTs:parseTs(cf.arranqueFecha,cf.arranqueHora),scrapPeso:cf.scrapPeso,scrapUnidad:cf.scrapUnidad,fecha:today(),hora:now(),rolls,qa:null});
+  S.cform=newCform();save(S.orders);render();toast("Corrida agregada ("+count+" rollos)")}
+function finalizeOrder(id){const o=S.orders.find(x=>x.id===id);if(!o)return;o.finFecha=today();o.finHora=now();save(S.orders);render();toast("Orden finalizada");setTimeout(()=>printRunsheet(id),250)}
+
+/* QA CHECKLIST */
+function openQA(orderId,num){const o=S.orders.find(x=>x.id===orderId);const c=o&&(o.corridas||[]).find(x=>x.num===num);if(!c)return;
+  S.qaTarget={orderId,num};
+  S.qaForm=c.qa?Object.assign({navajasColocadas:null,navajasCortando:null,grosorAdecuado:null,nota:"",qaNombre:"",qaNum:""},c.qa):{navajasColocadas:null,navajasCortando:null,grosorAdecuado:null,nota:"",qaNombre:"",qaNum:""};
+  renderQAModal();}
+function setQA(k,v){S.qaForm[k]=v;renderQAModal()}
+function renderQAModal(){
+  const ex=document.getElementById("qaov");if(ex)ex.remove();
+  if(!S.qaTarget)return;const o=S.orders.find(x=>x.id===S.qaTarget.orderId);if(!o)return;const c=(o.corridas||[]).find(x=>x.num===S.qaTarget.num);if(!c)return;
+  const f=S.qaForm;
+  const tg=(k,label)=>`<div class="qitem"><div class="ql">${label}</div><div class="qyn"><button class="${f[k]===true?'on yes':''}" onclick="setQA('${k}',true)">Sí</button><button class="${f[k]===false?'on no':''}" onclick="setQA('${k}',false)">No</button></div></div>`;
+  const done=c.qa&&c.qa.done;
+  const el=document.createElement("div");el.className="ov";el.id="qaov";el.onclick=e=>{if(e.target===el)closeQA()};
+  el.innerHTML=`<div class="modal"><div class="mhead"><div><b>Checklist QA · Corrida ${c.num}</b><div><small>W.O. ${esc(o.wo)} · arranque ${esc(c.arranqueFecha)} ${esc(c.arranqueHora)}</small></div></div><button onclick="closeQA()" style="color:#fff;padding:6px">✕</button></div>
     <div class="mbody">
-      ${dr("Corrida (Run)",r.corrida)}${dr("Rollo (Reel)",r.reel)}${dr("W/U",`${r.wu1} · ${r.wu2} · ${r.wu3} · ${r.wu4}`)}
-      ${dr("Blend / Calibre",`${r.blend} / ${r.calibre||"—"}`)}
-      ${dr("Inicio",`${r.fechaInicio} ${r.horaInicio} · ${r.turnoInicio} · ${r.operadorInicio}`)}
-      ${dr("Término",`${r.fechaTermino} ${r.horaTermino} · ${r.turnoTermino}`)}
-      ${dr("Inspeccionado por",r.inspeccionadoPor)}${dr("Footage",r.footage+" pies")}${dr("Scrap",conv(r.scrapPeso,r.scrapUnidad))}
-      <button class="btn btn-dark full" style="margin-top:16px" onclick="printSheet(window.__cur())">🖨 Imprimir Run Sheet (PDF)</button>
+      <div class="pre" style="color:var(--mut);font-size:12px;margin-bottom:6px">Revisión a la 1.5 h del arranque, en presencia de QA.</div>
+      ${tg('navajasColocadas','Navajas colocadas adecuadamente')}
+      ${tg('navajasCortando','Navajas cortando')}
+      ${tg('grosorAdecuado','Grosor adecuado')}
+      <div class="field" style="margin-top:12px"><label class="lbl">Observaciones (opcional)</label><textarea class="inp" data-qa="nota" rows="2" placeholder="Notas…">${esc(f.nota)}</textarea></div>
+      <div class="secdiv"><label class="lbl">Autorización de QA (escaneo de gafete o número manual)</label>
+        <div class="g2"><input class="inp" data-qa="qaNombre" value="${esc(f.qaNombre)}" placeholder="Nombre (opcional)"><input class="inp" data-qa="qaNum" value="${esc(f.qaNum)}" placeholder="No. colaborador"></div>
+        <button class="scanbtn" onclick="scanQA()">◎ Escanear gafete de calidad</button></div>
+      <button id="qasave" class="btn btn-green full" style="margin-top:14px" onclick="submitQA()">${done?'Actualizar checklist':'Guardar checklist'}</button>
     </div></div>`;
   document.body.appendChild(el);
+  el.querySelectorAll("[data-qa]").forEach(i=>i.addEventListener("input",e=>{S.qaForm[i.dataset.qa]=e.target.value;updateQASave()}));
+  updateQASave();
 }
-window.__cur=()=>S.detail;
+function scanQA(){openScanner('Gafete de calidad',t=>{S.qaForm.qaNum=t;renderQAModal()})}
+function qaValid(){const f=S.qaForm;return f.navajasColocadas!==null&&f.navajasCortando!==null&&f.grosorAdecuado!==null&&(f.qaNum||"").toString().trim()}
+function updateQASave(){const b=document.getElementById("qasave");if(b)b.disabled=!qaValid()}
+function closeQA(){const m=document.getElementById("qaov");if(m)m.remove();S.qaTarget=null}
+function submitQA(){if(!qaValid())return;const f=S.qaForm;const o=S.orders.find(x=>x.id===S.qaTarget.orderId);const c=o&&(o.corridas||[]).find(x=>x.num===S.qaTarget.num);if(!c)return;
+  c.qa={done:true,navajasColocadas:f.navajasColocadas,navajasCortando:f.navajasCortando,grosorAdecuado:f.grosorAdecuado,nota:f.nota||"",qaNombre:f.qaNombre||"",qaNum:f.qaNum||"",fecha:today(),hora:now()};
+  S.qaAlerted.add(o.id+":"+c.num);save(S.orders);closeQA();toast("Checklist QA guardado");render()}
 
-function printSheet(r){if(!r)return;$("#printarea").innerHTML=buildSheet(r);setTimeout(()=>window.print(),80)}
-function buildSheet(r){
-  const td=(l,v)=>`<tr><td class="l">${l}</td><td colspan="2">${esc(v)||"&nbsp;"}</td></tr>`;
-  return `<div class="rsheet">
-    <div class="rstop">FILM LINE RUN SHEET</div>
-    <div class="rsprint"><span><b>Números de rastreo FL</b></span><span>Fecha de impresión: <b>${esc(r.fechaImpresion||"")}</b></span></div>
-    <table>
-      <tr><td class="sect" colspan="3">IDENTIFICACIÓN</td></tr>
-      ${td("Producto",r.producto)}
-      <tr><td class="l">Work Order (W.O.#)</td><td colspan="2" class="mono">${esc(r.wo)}</td></tr>
-      ${td("Film Line #",r.filmLine)}${td("Corrida (Run)",r.corrida)}${td("Rollo (Reel)",r.reel)}
-      <tr><td class="sect" colspan="3">ROLLO — NÚMEROS DE RASTREO (W/U)</td></tr>
-      <tr><td class="rl" rowspan="4">R<br>O<br>L<br>L<br>O</td><td class="sub">W/U #1</td><td class="mono">${esc(r.wu1)}</td></tr>
-      <tr><td class="sub">W/U #2</td><td class="mono">${esc(r.wu2)}</td></tr>
-      <tr><td class="sub">W/U #3</td><td class="mono">${esc(r.wu3)}</td></tr>
-      <tr><td class="sub">W/U #4</td><td class="mono">${esc(r.wu4)}</td></tr>
-      ${td("Calibre",r.calibre)}${td("Blend",r.blend)}
-      <tr><td class="sect" colspan="3">OPERACIÓN</td></tr>
-      ${td("Fecha de inicio",r.fechaInicio)}${td("Turno de inicio",r.turnoInicio)}${td("Hora de inicio",r.horaInicio)}${td("Operador (inicio)",r.operadorInicio)}
-      ${td("Fecha de término",r.fechaTermino)}${td("Turno que terminó",r.turnoTermino)}${td("Hora de término",r.horaTermino)}${td("Operador (término)",r.operadorTermino)}
-      ${td("Inspeccionado por",r.inspeccionadoPor)}
-      <tr><td class="sect" colspan="3">PRODUCCIÓN Y SCRAP</td></tr>
-      <tr><td class="l">Footage (pies)</td><td colspan="2" class="mono">${esc(r.footage)}</td></tr>
-      ${td("Scrap Weight ("+esc(r.scrapUnidad)+")",conv(r.scrapPeso,r.scrapUnidad))}
-    </table>
-    <div class="rsfoot">Generado por el Sistema de Hoja de Trabajo · PRAXA Control · soporte@praxacontrol.com · +52 (664) 304-3903</div>
+/* MANAGER */
+function renderManager(){
+  const q=S.query.toLowerCase();
+  const fl=S.orders.filter(o=>!q||[o.wo,o.filmLine,o.lote,o.mezcla,o.createdBy].some(x=>(x||"").toLowerCase().includes(q)));
+  const totRolls=S.orders.reduce((s,o)=>s+allRolls(o).length,0);
+  const totPeso=S.orders.reduce((s,o)=>s+allRolls(o).reduce((a,r)=>a+(Number(r.peso)||0),0),0);
+  const totScrap=S.orders.reduce((s,o)=>s+orderScrapLbs(o),0);
+  app().innerHTML=topbar("")+`<div class="wrap">${qaBannerHTML(S.orders)}<div class="pt20"><h1 class="t">Panel del gerente</h1><p class="muted" style="font-size:13px">Órdenes y rollos capturados por los operadores.</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+      <div class="panel" style="padding:12px"><div style="font-size:22px;font-weight:800;color:var(--navy)">${S.orders.length}</div><div style="font-size:11px;color:var(--mut)">Órdenes</div></div>
+      <div class="panel" style="padding:12px"><div style="font-size:22px;font-weight:800;color:var(--blue)">${totRolls}</div><div style="font-size:11px;color:var(--mut)">Rollos</div></div>
+      <div class="panel" style="padding:12px"><div style="font-size:22px;font-weight:800;color:var(--navy)">${totPeso.toFixed(0)}</div><div style="font-size:11px;color:var(--mut)">Peso (lbs)</div></div>
+      <div class="panel" style="padding:12px"><div style="font-size:22px;font-weight:800;color:var(--red)">${totScrap.toFixed(0)}</div><div style="font-size:11px;color:var(--mut)">Scrap (lbs)</div></div>
+    </div>
+    <div class="search"><span class="ic">⌕</span><input id="q" value="${esc(S.query)}" placeholder="Buscar W.O., film line, lote, operador…"></div>
+    <div id="rl">${fl.length?fl.map(orderCardMgr).join(""):'<div class="empty">Sin órdenes aún.</div>'}</div></div>`;
+  const qi=$("#q");if(qi)qi.addEventListener("input",e=>{S.query=e.target.value;const q2=S.query.toLowerCase();const f2=S.orders.filter(o=>!q2||[o.wo,o.filmLine,o.lote,o.mezcla,o.createdBy].some(x=>(x||"").toLowerCase().includes(q2)));$("#rl").innerHTML=f2.length?f2.map(orderCardMgr).join(""):'<div class="empty">Sin resultados</div>'});
+}
+function orderCardMgr(o){const n=allRolls(o).length,tot=allRolls(o).reduce((s,r)=>s+(Number(r.peso)||0),0);const pend=(o.corridas||[]).some(qaDue);
+  return `<button class="rec" onclick="openDetail('${o.id}')"><div>
+    <div><span class="o">W.O. ${esc(o.wo)}</span> <span class="pill">FL ${esc(o.filmLine)}</span> ${o.finFecha?'<span class="pill">Finalizada</span>':'<span class="pill" style="background:#fef3c7;color:#92400e">En proceso</span>'} ${pend?'<span class="pill" style="background:#fee2e2;color:#b91c1c">QA pendiente</span>':''}</div>
+    <div class="meta">${esc(o.createdBy)} · ${esc(o.inicioFecha)} · Mezcla ${esc(o.mezcla||'—')}</div>
+  </div><div style="text-align:right"><div class="o">${n}/70</div><div class="meta">${tot.toFixed(0)} lbs</div></div></button>`}
+function openDetail(id){S.detail=S.orders.find(o=>o.id===id);renderModal()}
+function closeDetail(){S.detail=null;const m=$("#ov");if(m)m.remove()}
+function renderModal(){const o=S.detail;if(!o)return;const rolls=allRolls(o);const n=rolls.length,tot=rolls.reduce((s,r)=>s+(Number(r.peso)||0),0);
+  const dr=(k,v)=>`<div class="drow"><span class="k">${k}</span><span class="v">${esc(v)||"—"}</span></div>`;
+  let ctab="";if((o.corridas||[]).length){ctab=`<div class="ctabwrap"><table class="ctab"><tr><th>Corr.</th><th>Turno</th><th>SKU</th><th>Operador</th><th>Máquina</th><th>Scrap</th><th>QA</th></tr>${o.corridas.map(c=>{let q="Pend.";if(c.qa&&c.qa.done){const ok=c.qa.navajasColocadas&&c.qa.navajasCortando&&c.qa.grosorAdecuado;q=(ok?"OK":"Revisar")+(c.qa.qaNum?(" #"+esc(c.qa.qaNum)):"")}else if(qaDue(c))q="Vencido";return `<tr><td>${c.num}</td><td>${esc(c.turno)||'—'}</td><td>${esc(c.sku)||'—'}</td><td>${esc(c.operadorNombre||'—')}${c.operadorNum?(' #'+esc(c.operadorNum)):''}</td><td>${esc(c.maquina)||'—'}</td><td>${esc(c.scrapPeso)||'0'} ${esc(c.scrapUnidad)}</td><td>${q}</td></tr>`}).join("")}</table></div>`}
+  const el=document.createElement("div");el.className="ov";el.id="ov";el.onclick=e=>{if(e.target===el)closeDetail()};
+  el.innerHTML=`<div class="modal"><div class="mhead"><div><b>W.O. ${esc(o.wo)}</b><div><small>Film Line ${esc(o.filmLine)} · ${o.finFecha?'Finalizada':'En proceso'}</small></div></div><button onclick="closeDetail()" style="color:#fff;padding:6px">✕</button></div>
+    <div class="mbody">
+      ${dr("Rollos registrados",n+" / 70")}${dr("Peso total",tot.toFixed(1)+" lbs")}${dr("Corridas",(o.corridas||[]).length)}${dr("Scrap total",orderScrapLbs(o).toFixed(1)+" lbs")}
+      ${dr("Año / Grosor nom. / Mezcla",`${o.anio} / ${o.grosor||'—'} / ${o.mezcla||'—'}`)}${dr("Series / Lote",`${o.series} / ${o.lote||'—'}`)}
+      ${dr("Inicio",`${o.inicioFecha} ${o.inicioHora}`)}${dr("Fin",o.finFecha?`${o.finFecha} ${o.finHora}`:"—")}${dr("Capturó",o.createdBy)}
+      ${ctab?`<div class="lbl" style="margin-top:14px">Corridas</div>${ctab}`:""}
+      <button class="btn btn-dark full" style="margin-top:16px" onclick="printRunsheet('${o.id}')">🖨 Imprimir Run Sheet (PDF)</button>
+    </div></div>`;document.body.appendChild(el);
+}
+
+/* PRINT RUN SHEET (TFP-0041) */
+function printRunsheet(id){const o=S.orders.find(x=>x.id===id);if(!o)return;$("#printarea").innerHTML=buildSheet(o);setTimeout(()=>{try{window.print()}catch(e){}},80)}
+function buildSheet(o){
+  const rolls=allRolls(o);const byRollo={};rolls.forEach(r=>byRollo[r.rollo]=r);
+  function rowsHTML(from,to){let h=`<table><tr><th>WO #</th><th>FECHA</th><th>HORA</th><th>W/U</th><th>ROLLO</th><th>PESO</th><th>GROSOR</th></tr>`;
+    for(let n=from;n<=to;n++){const r=byRollo[p3(n)];h+=`<tr><td>${r?esc(o.wo):"&nbsp;"}</td><td>${r?esc(r.fecha):""}</td><td>${r?esc(r.hora):""}</td><td>${r?r.wu:""}</td><td class="rn">${p3(n)}</td><td>${r?esc(r.peso):""}</td><td>${r?esc(r.grosor):""}</td></tr>`}
+    return h+"</table>"}
+  const box=(v,l)=>`<div class="lbx"><div class="lb">${esc(v)||"&nbsp;"}</div><small>${l}</small></div>`;
+  function qaCell(c){if(c.qa&&c.qa.done){const ok=c.qa.navajasColocadas&&c.qa.navajasCortando&&c.qa.grosorAdecuado;return (ok?"OK":"REVISAR")+(c.qa.qaNum?(" #"+esc(c.qa.qaNum)):"")}return qaDue(c)?"VENCIDO":"PENDIENTE"}
+  let csum="";if((o.corridas||[]).length){csum=`<div class="csum"><div class="h">CORRIDAS · TURNO · SKU · OPERADOR · MÁQUINA · ARRANQUE · SCRAP · QA</div><table><tr><th>CORR</th><th>ROLLOS</th><th>TURNO</th><th>SKU</th><th>OPERADOR</th><th>MÁQ</th><th>ARRANQUE</th><th>SCRAP</th><th>QA</th></tr>`+
+    o.corridas.map(c=>{const ro=c.rolls.map(r=>r.rollo);const rng=ro.length?`${ro[0]}–${ro[ro.length-1]}`:"";return `<tr><td class="rn">${c.num}</td><td>${rng}</td><td>${esc(c.turno)}</td><td>${esc(c.sku)}</td><td>${esc(c.operadorNombre)}${c.operadorNum?(" #"+esc(c.operadorNum)):""}</td><td>${esc(c.maquina)}</td><td>${esc(c.arranqueFecha)} ${esc(c.arranqueHora)}</td><td>${esc(c.scrapPeso)||"0"} ${esc(c.scrapUnidad)}</td><td>${qaCell(c)}</td></tr>`}).join("")+
+    `<tr><td colspan="7" style="text-align:right;font-weight:700">SCRAP TOTAL</td><td colspan="2" style="font-weight:700">${orderScrapLbs(o).toFixed(1)} lbs</td></tr></table></div>`}
+  return `<div class="rs">
+    <div class="tt">REGISTRO DE ROLLOS DE FILM LINE<br>(FILM LINE RUN SHEET)</div>
+    <div class="rscols">${rowsHTML(1,35)}${rowsHTML(36,70)}</div>
+    <div class="note">EL TURNO QUE REALICE CUALQUIER CAMBIO DEBE LLENAR HOJAS NUEVAS AL MOMENTO DE LA FECHA DE FINALIZACIÓN</div>
+    ${csum}
+    <div class="series">Series<br>${esc(o.series)}</div>
+    <div class="lote"><b>Lote #</b>${box(o.lote,"")}${box(o.filmLine,"Film Line #")}${box(o.anio,"Año")}${box(o.grosor,"Grosor nom.")}${box(o.mezcla,"Mezcla")}${box(o.wo,"WO #")}</div>
+    <div class="times">Inicio Fecha/Hora: <b>${esc(o.inicioFecha)} ${esc(o.inicioHora)}</b> &nbsp;&nbsp;&nbsp; Fin Fecha/Hora: <b>${o.finFecha?esc(o.finFecha)+" "+esc(o.finHora):"________"}</b></div>
+    <div class="foot"><span>TFP-0041 Registro de Produccion Film Line · Rev. 0 · Fecha de Rev: 10/30/2023</span><span>Generado por PRAXA Control</span></div>
   </div>`;
 }
 
-function toast(m){const t=document.createElement("div");t.className="toast";t.textContent="✓ "+m;document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent="✓ "+m;document.body.appendChild(t);setTimeout(()=>t.remove(),2300)}
 
-let _sc=null,_sf=null;
-function openScanner(k,label){_sf=k;const ov=document.createElement("div");ov.className="scan-ov";ov.id="scanov";
+/* SCANNER (genérico con callback) */
+let _sc=null,_scCb=null;
+function openScanner(label,cb){_scCb=cb;const ov=document.createElement("div");ov.className="scan-ov";ov.id="scanov";
   ov.innerHTML=`<div class="scan-top"><b>Escanear ${esc(label)}</b><button style="color:#fff" onclick="closeScanner()">✕</button></div><div id="reader"></div><div id="scanerr" class="scan-err"></div><div class="scan-bottom">Apunta al código de barras o QR<button class="mbtn" onclick="closeScanner()">Capturar manualmente</button></div>`;
   document.body.appendChild(ov);startScan()}
 function startScan(){if(typeof Html5Qrcode==="undefined"){scanErr("La librería de escaneo no cargó (revisa internet).");return}
   try{_sc=new Html5Qrcode("reader",{verbose:false})}catch(e){scanErr("No se pudo iniciar.");return}
-  _sc.start({facingMode:"environment"},{fps:10,qrbox:{width:260,height:170}},onScan,()=>{}).catch(()=>scanErr("No se pudo abrir la cámara. Da permiso en Safari/Chrome o captura manualmente. (En el editor la cámara puede estar bloqueada; en el sitio publicado funciona.)"))}
-function onScan(t){S.form[_sf]=t;const i=document.querySelector(`[data-k=${_sf}]`);if(i)i.value=t;if(typeof updateNext==="function")updateNext();closeScanner();toast("Escaneado: "+t)}
+  _sc.start({facingMode:"environment"},{fps:10,qrbox:{width:260,height:170}},onScan,()=>{}).catch(()=>scanErr("No se pudo abrir la cámara. Da permiso en Safari/Chrome o captura manualmente."))}
+function onScan(t){const cb=_scCb;closeScanner();if(cb)cb(t);toast("Escaneado: "+t)}
 function scanErr(m){const e=document.getElementById("scanerr");if(e)e.textContent=m}
 function closeScanner(){const done=()=>{const o=document.getElementById("scanov");if(o)o.remove()};if(_sc){_sc.stop().then(()=>{try{_sc.clear()}catch(e){}_sc=null;done()}).catch(()=>{_sc=null;done()})}else done()}
 
+/* ALERTA QA PERIÓDICA */
+setInterval(()=>{
+  if(!S.user)return;
+  let newly=false;
+  scopeOrders().forEach(o=>(o.corridas||[]).forEach(c=>{const id=o.id+":"+c.num;if(qaDue(c)&&!S.qaAlerted.has(id)){S.qaAlerted.add(id);newly=true}}));
+  if(newly){
+    toast("Checklist de QA pendiente");
+    const ae=document.activeElement,typing=ae&&/INPUT|TEXTAREA/.test(ae.tagName);
+    if(!document.getElementById("scanov")&&!document.getElementById("qaov")&&!typing){try{render()}catch(e){}}
+  }
+},30000);
+
+/* ICON + MANIFEST */
 function mkIcon(sz){const c=document.createElement("canvas");c.width=c.height=sz;const x=c.getContext("2d");rr(x,0,0,sz,sz,sz*0.22);x.fillStyle="#15314F";x.fill();x.fillStyle="#3880C8";rr(x,sz*0.24,sz*0.24,sz*0.52,sz*0.52,sz*0.10);x.fill();x.fillStyle="#fff";x.font="bold "+(sz*0.26)+"px Arial";x.textAlign="center";x.textBaseline="middle";x.fillText("PX",sz/2,sz*0.52);return c.toDataURL("image/png")}
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
-try{document.getElementById("touch-icon").href=mkIcon(180);const man={name:"Hoja de Trabajo",short_name:"Hoja Trabajo",start_url:".",display:"standalone",background_color:"#15314F",theme_color:"#15314F",icons:[{src:mkIcon(512),sizes:"512x512",type:"image/png"},{src:mkIcon(192),sizes:"192x192",type:"image/png"}]};document.getElementById("manifest-link").href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:"application/json"}))}catch(e){}
+try{document.getElementById("touch-icon").href=mkIcon(180);const man={name:"Registro de Rollos Film Line",short_name:"Hoja de Trabajo",start_url:".",display:"standalone",background_color:"#15314F",theme_color:"#15314F",icons:[{src:mkIcon(512),sizes:"512x512",type:"image/png"},{src:mkIcon(192),sizes:"192x192",type:"image/png"}]};document.getElementById("manifest-link").href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:"application/json"}))}catch(e){}
 
 render();
 </script>
